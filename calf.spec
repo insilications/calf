@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : calf
 Version  : 0.90.3
-Release  : 211
+Release  : 212
 URL      : file:///aot/build/clearlinux/packages/calf/calf-v0.90.3.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/calf/calf-v0.90.3.tar.gz
 Summary  : No detailed summary available
@@ -256,7 +256,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640218309
+export SOURCE_DATE_EPOCH=1640218637
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -348,12 +348,14 @@ sd -r 'git describe' 'git describe --abbrev=0' .
 --enable-static \
 --enable-experimental=yes \
 --with-lv2 \
---enable-ladspa
+--enable-ladspa \
+--with-ladspa-dir=/usr/lib64/ladspa \
+--with-lv2-dir=/usr/lib64/lv2
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 
 
 %install
-export SOURCE_DATE_EPOCH=1640218309
+export SOURCE_DATE_EPOCH=1640218637
 rm -rf %{buildroot}
 %make_install
 
@@ -1017,71 +1019,71 @@ rm -rf %{buildroot}
 
 %files dev
 %defattr(-,root,root,-)
-/usr/lib/lv2/calf.lv2/Analyzer.ttl
-/usr/lib/lv2/calf.lv2/BassEnhancer.ttl
-/usr/lib/lv2/calf.lv2/CompensationDelay.ttl
-/usr/lib/lv2/calf.lv2/Compressor.ttl
-/usr/lib/lv2/calf.lv2/Crusher.ttl
-/usr/lib/lv2/calf.lv2/Deesser.ttl
-/usr/lib/lv2/calf.lv2/Emphasis.ttl
-/usr/lib/lv2/calf.lv2/EnvelopeFilter.ttl
-/usr/lib/lv2/calf.lv2/Equalizer12Band.ttl
-/usr/lib/lv2/calf.lv2/Equalizer30Band.ttl
-/usr/lib/lv2/calf.lv2/Equalizer5Band.ttl
-/usr/lib/lv2/calf.lv2/Equalizer8Band.ttl
-/usr/lib/lv2/calf.lv2/Exciter.ttl
-/usr/lib/lv2/calf.lv2/Filter.ttl
-/usr/lib/lv2/calf.lv2/Filterclavier.ttl
-/usr/lib/lv2/calf.lv2/Flanger.ttl
-/usr/lib/lv2/calf.lv2/Fluidsynth.ttl
-/usr/lib/lv2/calf.lv2/Gate.ttl
-/usr/lib/lv2/calf.lv2/HaasEnhancer.ttl
-/usr/lib/lv2/calf.lv2/Limiter.ttl
-/usr/lib/lv2/calf.lv2/MonoCompressor.ttl
-/usr/lib/lv2/calf.lv2/MonoInput.ttl
-/usr/lib/lv2/calf.lv2/Monosynth.ttl
-/usr/lib/lv2/calf.lv2/MultiChorus.ttl
-/usr/lib/lv2/calf.lv2/MultiSpread.ttl
-/usr/lib/lv2/calf.lv2/MultibandCompressor.ttl
-/usr/lib/lv2/calf.lv2/MultibandEnhancer.ttl
-/usr/lib/lv2/calf.lv2/MultibandGate.ttl
-/usr/lib/lv2/calf.lv2/MultibandLimiter.ttl
-/usr/lib/lv2/calf.lv2/Organ.ttl
-/usr/lib/lv2/calf.lv2/Phaser.ttl
-/usr/lib/lv2/calf.lv2/Pitch.ttl
-/usr/lib/lv2/calf.lv2/PsyClipper.ttl
-/usr/lib/lv2/calf.lv2/Pulsator.ttl
-/usr/lib/lv2/calf.lv2/Reverb.ttl
-/usr/lib/lv2/calf.lv2/ReverseDelay.ttl
-/usr/lib/lv2/calf.lv2/RingModulator.ttl
-/usr/lib/lv2/calf.lv2/RotarySpeaker.ttl
-/usr/lib/lv2/calf.lv2/Saturator.ttl
-/usr/lib/lv2/calf.lv2/SidechainCompressor.ttl
-/usr/lib/lv2/calf.lv2/SidechainGate.ttl
-/usr/lib/lv2/calf.lv2/SidechainLimiter.ttl
-/usr/lib/lv2/calf.lv2/StereoTools.ttl
-/usr/lib/lv2/calf.lv2/TapeSimulator.ttl
-/usr/lib/lv2/calf.lv2/TransientDesigner.ttl
-/usr/lib/lv2/calf.lv2/VintageDelay.ttl
-/usr/lib/lv2/calf.lv2/Vinyl.ttl
-/usr/lib/lv2/calf.lv2/Vocoder.ttl
-/usr/lib/lv2/calf.lv2/Wavetable.ttl
-/usr/lib/lv2/calf.lv2/XOver2Band.ttl
-/usr/lib/lv2/calf.lv2/XOver3Band.ttl
-/usr/lib/lv2/calf.lv2/XOver4Band.ttl
-/usr/lib/lv2/calf.lv2/calf.so
-/usr/lib/lv2/calf.lv2/manifest.ttl
-/usr/lib/lv2/calf.lv2/presets-Filter.ttl
-/usr/lib/lv2/calf.lv2/presets-Flanger.ttl
-/usr/lib/lv2/calf.lv2/presets-MonoCompressor.ttl
-/usr/lib/lv2/calf.lv2/presets-Monosynth.ttl
-/usr/lib/lv2/calf.lv2/presets-Organ.ttl
-/usr/lib/lv2/calf.lv2/presets-Reverb.ttl
-/usr/lib/lv2/calf.lv2/presets-Wavetable.ttl
 /usr/lib64/calf/libcalf.la
 /usr/lib64/calf/libcalf.so
 /usr/lib64/calf/libcalflv2gui.la
 /usr/lib64/calf/libcalflv2gui.so
+/usr/lib64/lv2/calf.lv2/Analyzer.ttl
+/usr/lib64/lv2/calf.lv2/BassEnhancer.ttl
+/usr/lib64/lv2/calf.lv2/CompensationDelay.ttl
+/usr/lib64/lv2/calf.lv2/Compressor.ttl
+/usr/lib64/lv2/calf.lv2/Crusher.ttl
+/usr/lib64/lv2/calf.lv2/Deesser.ttl
+/usr/lib64/lv2/calf.lv2/Emphasis.ttl
+/usr/lib64/lv2/calf.lv2/EnvelopeFilter.ttl
+/usr/lib64/lv2/calf.lv2/Equalizer12Band.ttl
+/usr/lib64/lv2/calf.lv2/Equalizer30Band.ttl
+/usr/lib64/lv2/calf.lv2/Equalizer5Band.ttl
+/usr/lib64/lv2/calf.lv2/Equalizer8Band.ttl
+/usr/lib64/lv2/calf.lv2/Exciter.ttl
+/usr/lib64/lv2/calf.lv2/Filter.ttl
+/usr/lib64/lv2/calf.lv2/Filterclavier.ttl
+/usr/lib64/lv2/calf.lv2/Flanger.ttl
+/usr/lib64/lv2/calf.lv2/Fluidsynth.ttl
+/usr/lib64/lv2/calf.lv2/Gate.ttl
+/usr/lib64/lv2/calf.lv2/HaasEnhancer.ttl
+/usr/lib64/lv2/calf.lv2/Limiter.ttl
+/usr/lib64/lv2/calf.lv2/MonoCompressor.ttl
+/usr/lib64/lv2/calf.lv2/MonoInput.ttl
+/usr/lib64/lv2/calf.lv2/Monosynth.ttl
+/usr/lib64/lv2/calf.lv2/MultiChorus.ttl
+/usr/lib64/lv2/calf.lv2/MultiSpread.ttl
+/usr/lib64/lv2/calf.lv2/MultibandCompressor.ttl
+/usr/lib64/lv2/calf.lv2/MultibandEnhancer.ttl
+/usr/lib64/lv2/calf.lv2/MultibandGate.ttl
+/usr/lib64/lv2/calf.lv2/MultibandLimiter.ttl
+/usr/lib64/lv2/calf.lv2/Organ.ttl
+/usr/lib64/lv2/calf.lv2/Phaser.ttl
+/usr/lib64/lv2/calf.lv2/Pitch.ttl
+/usr/lib64/lv2/calf.lv2/PsyClipper.ttl
+/usr/lib64/lv2/calf.lv2/Pulsator.ttl
+/usr/lib64/lv2/calf.lv2/Reverb.ttl
+/usr/lib64/lv2/calf.lv2/ReverseDelay.ttl
+/usr/lib64/lv2/calf.lv2/RingModulator.ttl
+/usr/lib64/lv2/calf.lv2/RotarySpeaker.ttl
+/usr/lib64/lv2/calf.lv2/Saturator.ttl
+/usr/lib64/lv2/calf.lv2/SidechainCompressor.ttl
+/usr/lib64/lv2/calf.lv2/SidechainGate.ttl
+/usr/lib64/lv2/calf.lv2/SidechainLimiter.ttl
+/usr/lib64/lv2/calf.lv2/StereoTools.ttl
+/usr/lib64/lv2/calf.lv2/TapeSimulator.ttl
+/usr/lib64/lv2/calf.lv2/TransientDesigner.ttl
+/usr/lib64/lv2/calf.lv2/VintageDelay.ttl
+/usr/lib64/lv2/calf.lv2/Vinyl.ttl
+/usr/lib64/lv2/calf.lv2/Vocoder.ttl
+/usr/lib64/lv2/calf.lv2/Wavetable.ttl
+/usr/lib64/lv2/calf.lv2/XOver2Band.ttl
+/usr/lib64/lv2/calf.lv2/XOver3Band.ttl
+/usr/lib64/lv2/calf.lv2/XOver4Band.ttl
+/usr/lib64/lv2/calf.lv2/calf.so
+/usr/lib64/lv2/calf.lv2/manifest.ttl
+/usr/lib64/lv2/calf.lv2/presets-Filter.ttl
+/usr/lib64/lv2/calf.lv2/presets-Flanger.ttl
+/usr/lib64/lv2/calf.lv2/presets-MonoCompressor.ttl
+/usr/lib64/lv2/calf.lv2/presets-Monosynth.ttl
+/usr/lib64/lv2/calf.lv2/presets-Organ.ttl
+/usr/lib64/lv2/calf.lv2/presets-Reverb.ttl
+/usr/lib64/lv2/calf.lv2/presets-Wavetable.ttl
 
 %files doc
 %defattr(0644,root,root,0755)

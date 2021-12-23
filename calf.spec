@@ -5,19 +5,32 @@
 %define keepstatic 1
 Name     : calf
 Version  : 0.90.3
-Release  : 212
+Release  : 216
 URL      : file:///aot/build/clearlinux/packages/calf/calf-v0.90.3.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/calf/calf-v0.90.3.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
-Requires: calf-data = %{version}-%{release}
-Requires: calf-man = %{version}-%{release}
 BuildRequires : PyYAML
 BuildRequires : Pygments
+BuildRequires : SDL2
+BuildRequires : SDL2-dev
 BuildRequires : Sphinx
+BuildRequires : Vulkan-Headers-dev
+BuildRequires : Vulkan-Loader-dev
+BuildRequires : alsa-lib
 BuildRequires : alsa-lib-dev
 BuildRequires : alsa-lib-dev32
+BuildRequires : alsa-plugins
+BuildRequires : alsa-tools
+BuildRequires : alsa-tools-dev
+BuildRequires : alsa-ucm-conf
+BuildRequires : alsa-utils
+BuildRequires : appstream-glib
+BuildRequires : appstream-glib-dev
+BuildRequires : atk
+BuildRequires : atk-dev
+BuildRequires : atkmm-dev
 BuildRequires : autogen
 BuildRequires : autogen-dev
 BuildRequires : automake
@@ -25,24 +38,43 @@ BuildRequires : automake-dev
 BuildRequires : binutils-dev
 BuildRequires : binutils-extras
 BuildRequires : bison
+BuildRequires : breeze
+BuildRequires : breeze-gtk
+BuildRequires : breeze-icons
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-configure
 BuildRequires : buildreq-distutils3
+BuildRequires : buildreq-gnome
+BuildRequires : buildreq-meson
+BuildRequires : buildreq-qmake
 BuildRequires : bzip2-dev
 BuildRequires : bzip2-staticdev
 BuildRequires : cairo
 BuildRequires : cairo-dev
+BuildRequires : cairomm-dev
+BuildRequires : clr-avx-tools
 BuildRequires : clr-rpm-config
 BuildRequires : cmake
+BuildRequires : cmake-dev
+BuildRequires : colord-dev
+BuildRequires : cups
+BuildRequires : cups-dev
+BuildRequires : curl
 BuildRequires : curl-dev
+BuildRequires : curl-lib
+BuildRequires : dbus
+BuildRequires : dbus-dev
 BuildRequires : dejagnu
 BuildRequires : docbook-utils
 BuildRequires : docbook-xml
+BuildRequires : docutils
 BuildRequires : doxygen
 BuildRequires : elfutils-dev
+BuildRequires : expat
 BuildRequires : expat-dev
 BuildRequires : expat-staticdev
 BuildRequires : expect
+BuildRequires : extra-cmake-modules-data
 BuildRequires : fftw-dev
 BuildRequires : fftw-staticdev
 BuildRequires : findutils
@@ -55,6 +87,17 @@ BuildRequires : flex
 BuildRequires : fluidsynth
 BuildRequires : fluidsynth-dev
 BuildRequires : fluidsynth-staticdev
+BuildRequires : fmt
+BuildRequires : fmt-dev
+BuildRequires : fmt-staticdev
+BuildRequires : fomp
+BuildRequires : fomp-dev
+BuildRequires : fontconfig
+BuildRequires : fontconfig-dev
+BuildRequires : fonts-clear
+BuildRequires : freetype
+BuildRequires : freetype-dev
+BuildRequires : fribidi-dev
 BuildRequires : gcc
 BuildRequires : gcc-dev
 BuildRequires : gcc-dev32
@@ -67,9 +110,13 @@ BuildRequires : gcc-libstdc++32
 BuildRequires : gcc-libubsan
 BuildRequires : gcc-locale
 BuildRequires : gdb-dev
+BuildRequires : gdk-pixbuf
+BuildRequires : gdk-pixbuf-dev
 BuildRequires : git
 BuildRequires : glib
+BuildRequires : glib-bin
 BuildRequires : glib-dev
+BuildRequires : glib-networking
 BuildRequires : glibc-bin
 BuildRequires : glibc-dev
 BuildRequires : glibc-dev32
@@ -81,21 +128,106 @@ BuildRequires : glibc-locale
 BuildRequires : glibc-nscd
 BuildRequires : glibc-staticdev
 BuildRequires : glibc-utils
+BuildRequires : glslang
 BuildRequires : gmp-dev
+BuildRequires : gnutls
+BuildRequires : gnutls-dev
+BuildRequires : gobject-introspection
+BuildRequires : gobject-introspection-dev
 BuildRequires : googletest-dev
+BuildRequires : gperf
+BuildRequires : graphite
+BuildRequires : graphite-dev
 BuildRequires : graphviz
+BuildRequires : graphviz-extras
 BuildRequires : gtk+-dev
 BuildRequires : gtk3
 BuildRequires : gtk3-dev
+BuildRequires : gtk4
+BuildRequires : gtk4-dev
+BuildRequires : gtkmm4
+BuildRequires : gtkmm4-dev
+BuildRequires : gtkmm4-staticdev
 BuildRequires : guile
+BuildRequires : harfbuzz-dev
+BuildRequires : icu4c-dev
+BuildRequires : icu4c-lib
+BuildRequires : json
+BuildRequires : json-dev
+BuildRequires : keyutils
+BuildRequires : keyutils-dev
+BuildRequires : krb5
+BuildRequires : krb5-dev
 BuildRequires : ladspa_sdk
 BuildRequires : ladspa_sdk-dev
 BuildRequires : ladspa_sdk-staticdev
+BuildRequires : libICE-dev
+BuildRequires : libSM-dev
+BuildRequires : libX11-data
+BuildRequires : libX11-dev
+BuildRequires : libX11-lib
+BuildRequires : libXScrnSaver
+BuildRequires : libXScrnSaver-dev
+BuildRequires : libXScrnSaver-lib
+BuildRequires : libXau-dev
+BuildRequires : libXau-lib
+BuildRequires : libXcomposite-dev
+BuildRequires : libXcursor-dev
+BuildRequires : libXcursor-lib
+BuildRequires : libXdamage-dev
+BuildRequires : libXdamage-lib
+BuildRequires : libXdmcp-dev
+BuildRequires : libXdmcp-lib
+BuildRequires : libXext-dev
+BuildRequires : libXext-lib
+BuildRequires : libXfixes-dev
+BuildRequires : libXfont2-dev
+BuildRequires : libXft
+BuildRequires : libXft-dev
+BuildRequires : libXft-lib
+BuildRequires : libXi-dev
+BuildRequires : libXi-lib
+BuildRequires : libXinerama-dev
+BuildRequires : libXmu-dev
+BuildRequires : libXpm-dev
+BuildRequires : libXrandr-dev
+BuildRequires : libXrender-dev
+BuildRequires : libXrender-lib
+BuildRequires : libXres-dev
+BuildRequires : libXt-dev
+BuildRequires : libXtst-dev
+BuildRequires : libXtst-lib
+BuildRequires : libXv-dev
+BuildRequires : libXxf86vm-dev
+BuildRequires : libXxf86vm-lib
+BuildRequires : libadwaita
+BuildRequires : libadwaita-dev
+BuildRequires : libadwaita-staticdev
+BuildRequires : libbs2b
+BuildRequires : libbs2b-dev
+BuildRequires : libbs2b-staticdev
+BuildRequires : libcanberra-dev
+BuildRequires : libcap-dev
+BuildRequires : libcap-ng-dev
+BuildRequires : libcap-staticdev
+BuildRequires : libebur128
+BuildRequires : libebur128-dev
+BuildRequires : libebur128-staticdev
 BuildRequires : libedit
 BuildRequires : libedit-dev
+BuildRequires : libfdk_aac-dev
+BuildRequires : libfdk_aac-staticdev
 BuildRequires : libffi-dev
 BuildRequires : libffi-staticdev
 BuildRequires : libgcc1
+BuildRequires : libgcrypt-dev
+BuildRequires : libgit2
+BuildRequires : libgit2-dev
+BuildRequires : libjpeg-turbo-dev
+BuildRequires : libjpeg-turbo-dev32
+BuildRequires : libjpeg-turbo-lib
+BuildRequires : libjpeg-turbo-lib32
+BuildRequires : libjpeg-turbo-staticdev
 BuildRequires : liblo
 BuildRequires : liblo-dev
 BuildRequires : liblo-staticdev
@@ -103,24 +235,45 @@ BuildRequires : libogg-dev
 BuildRequires : libogg-dev32
 BuildRequires : libogg-staticdev
 BuildRequires : libogg-staticdev32
+BuildRequires : libpng
 BuildRequires : libpng-dev
 BuildRequires : libpng-staticdev
+BuildRequires : libpthread-stubs-dev
+BuildRequires : librsvg-dev
 BuildRequires : libsamplerate-dev
 BuildRequires : libsamplerate-staticdev
+BuildRequires : libsigc++-dev
+BuildRequires : libsigc++-staticdev
 BuildRequires : libsndfile-dev
 BuildRequires : libsndfile-staticdev
 BuildRequires : libstdc++
 BuildRequires : libtool-dev
 BuildRequires : libunwind-dev
+BuildRequires : libusb-dev
 BuildRequires : libvorbis-dev
 BuildRequires : libvorbis-dev32
 BuildRequires : libvorbis-staticdev
 BuildRequires : libvorbis-staticdev32
+BuildRequires : libwebp-dev
+BuildRequires : libwebp-staticdev
+BuildRequires : libxcb-dev
+BuildRequires : libxcb-lib
+BuildRequires : libxml2
 BuildRequires : libxml2-dev
 BuildRequires : libxml2-staticdev
 BuildRequires : libxslt
+BuildRequires : libxslt-bin
+BuildRequires : lilv
+BuildRequires : lilv-dev
+BuildRequires : lilv-staticdev
+BuildRequires : lua-dev
+BuildRequires : lua-staticdev
 BuildRequires : lv2
 BuildRequires : lv2-dev
+BuildRequires : lxml
+BuildRequires : m4
+BuildRequires : mda-lv2
+BuildRequires : mda-lv2-dev
 BuildRequires : mesa
 BuildRequires : mesa-dev
 BuildRequires : meson
@@ -130,14 +283,27 @@ BuildRequires : ncurses
 BuildRequires : ncurses-dev
 BuildRequires : ninja
 BuildRequires : octave-dev
+BuildRequires : openssh
+BuildRequires : openssl-dev
+BuildRequires : openssl-staticdev
 BuildRequires : opus
 BuildRequires : opus-dev
 BuildRequires : opus-lib
 BuildRequires : opus-staticdev
+BuildRequires : pango-dev
+BuildRequires : pangomm-dev
 BuildRequires : pcre-dev
 BuildRequires : pcre-staticdev
 BuildRequires : pcre2-dev
 BuildRequires : pcre2-staticdev
+BuildRequires : perl
+BuildRequires : perl(Test::More)
+BuildRequires : perl(XML::Parser)
+BuildRequires : pipewire
+BuildRequires : pipewire-dev
+BuildRequires : pipewire-tests
+BuildRequires : pixman-dev
+BuildRequires : pixman-staticdev
 BuildRequires : pkg-config
 BuildRequires : pkg-config-dev
 BuildRequires : pkgconfig(fftw3f)
@@ -149,14 +315,38 @@ BuildRequires : pkgconfig(sndfile)
 BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(x11-xcb)
 BuildRequires : procps-ng
+BuildRequires : pulseaudio
+BuildRequires : pulseaudio-dev
+BuildRequires : pygobject
+BuildRequires : pypi(html5lib)
+BuildRequires : pypi(importlib_metadata)
+BuildRequires : pypi(isodate)
+BuildRequires : pypi(pyparsing)
+BuildRequires : python-graphviz
 BuildRequires : python3
 BuildRequires : python3-dev
 BuildRequires : python3-staticdev
 BuildRequires : rdflib
+BuildRequires : readline-dev
+BuildRequires : requests
+BuildRequires : rnnoise
+BuildRequires : rnnoise-dev
+BuildRequires : rnnoise-staticdev
+BuildRequires : rpm
+BuildRequires : rpm-dev
+BuildRequires : rtkit
+BuildRequires : rtkit-bin
+BuildRequires : rtkit-data
+BuildRequires : rtkit-libexec
+BuildRequires : rtkit-services
+BuildRequires : sassc
 BuildRequires : sed
 BuildRequires : serd
 BuildRequires : serd-dev
 BuildRequires : serd-staticdev
+BuildRequires : setxkbmap
+BuildRequires : shared-mime-info
+BuildRequires : shared-mime-info-dev
 BuildRequires : sord
 BuildRequires : sord-dev
 BuildRequires : sord-staticdev
@@ -168,13 +358,70 @@ BuildRequires : sqlite-autoconf-dev
 BuildRequires : sratom
 BuildRequires : sratom-dev
 BuildRequires : sratom-staticdev
+BuildRequires : systemd
+BuildRequires : systemd-dev
+BuildRequires : tbb
+BuildRequires : tbb-dev
+BuildRequires : tbb-staticdev
 BuildRequires : tcl
 BuildRequires : texinfo
+BuildRequires : tiff-dev
+BuildRequires : tiff-staticdev
 BuildRequires : util-linux
+BuildRequires : util-linux-dev
+BuildRequires : valgrind
 BuildRequires : valgrind-dev
 BuildRequires : vamp-sdk
 BuildRequires : vamp-sdk-dev
 BuildRequires : vamp-sdk-staticdev
+BuildRequires : wayland
+BuildRequires : wayland-dev
+BuildRequires : xauth
+BuildRequires : xclip
+BuildRequires : xdg-dbus-proxy
+BuildRequires : xdg-desktop-portal
+BuildRequires : xdg-desktop-portal-dev
+BuildRequires : xdg-desktop-portal-gtk
+BuildRequires : xdg-desktop-portal-kde
+BuildRequires : xdg-user-dirs
+BuildRequires : xdg-user-dirs-gtk
+BuildRequires : xdg-utils
+BuildRequires : xdotool
+BuildRequires : xdpyinfo
+BuildRequires : xf86-input-libinput
+BuildRequires : xf86-video-amdgpu
+BuildRequires : xf86-video-ati
+BuildRequires : xf86-video-fbdev
+BuildRequires : xf86-video-nouveau
+BuildRequires : xf86-video-qxl
+BuildRequires : xf86-video-vboxvideo
+BuildRequires : xf86-video-vesa
+BuildRequires : xf86-video-vmware
+BuildRequires : xfontsel
+BuildRequires : xhost
+BuildRequires : xinit
+BuildRequires : xinput
+BuildRequires : xkbcomp
+BuildRequires : xkeyboard-config
+BuildRequires : xkill
+BuildRequires : xmodmap
+BuildRequires : xorg-server
+BuildRequires : xorg-server-dev
+BuildRequires : xorgproto
+BuildRequires : xorgproto-dev
+BuildRequires : xprop
+BuildRequires : xrandr
+BuildRequires : xrdb
+BuildRequires : xrdp
+BuildRequires : xrestop
+BuildRequires : xscreensaver
+BuildRequires : xsel
+BuildRequires : xset
+BuildRequires : xsetroot
+BuildRequires : xvfb-run
+BuildRequires : xwd
+BuildRequires : xwininfo
+BuildRequires : xz
 BuildRequires : xz-dev
 BuildRequires : xz-staticdev
 BuildRequires : yaml
@@ -190,6 +437,7 @@ BuildRequires : zstd-staticdev
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
+Patch1: fix-symlinks-in-lv2dir.patch
 
 %description
 Calf Studio gear
@@ -201,54 +449,10 @@ distortion and mastering effects), instruments (SF2 player, organ
 simulator and a monophonic synthesizer) and tools (analyzer, mono/stereo
 tools, crossovers). Calf Studio Gear aims for a professional audience.
 
-%package data
-Summary: data components for the calf package.
-Group: Data
-
-%description data
-data components for the calf package.
-
-
-%package dev
-Summary: dev components for the calf package.
-Group: Development
-Requires: calf-data = %{version}-%{release}
-Provides: calf-devel = %{version}-%{release}
-Requires: calf = %{version}-%{release}
-
-%description dev
-dev components for the calf package.
-
-
-%package doc
-Summary: doc components for the calf package.
-Group: Documentation
-Requires: calf-man = %{version}-%{release}
-
-%description doc
-doc components for the calf package.
-
-
-%package man
-Summary: man components for the calf package.
-Group: Default
-
-%description man
-man components for the calf package.
-
-
-%package staticdev
-Summary: staticdev components for the calf package.
-Group: Default
-Requires: calf-dev = %{version}-%{release}
-
-%description staticdev
-staticdev components for the calf package.
-
-
 %prep
 %setup -q -n calf
 cd %{_builddir}/calf
+%patch1 -p1
 
 %build
 unset http_proxy
@@ -256,7 +460,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640218637
+export SOURCE_DATE_EPOCH=1640505188
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -276,7 +480,6 @@ export CXXFLAGS="-g3 -ggdb -Ofast --param=lto-max-streaming-parallelism=16 -marc
 #
 export FCFLAGS="-g3 -ggdb -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
 export FFLAGS="-g3 -ggdb -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export CFFLAGS="-g3 -ggdb -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
 #
 export LDFLAGS="-g3 -ggdb -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
 #
@@ -344,9 +547,11 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 ## altflags1 end
 sd -r '\s--dirty\s' ' ' .
 sd -r 'git describe' 'git describe --abbrev=0' .
-%autogen_simple  --enable-shared \
---enable-static \
+%autogen_simple  --enable-shared=yes \
+--enable-static=yes \
 --enable-experimental=yes \
+--disable-debug \
+--enable-sse \
 --with-lv2 \
 --enable-ladspa \
 --with-ladspa-dir=/usr/lib64/ladspa \
@@ -355,746 +560,96 @@ make  %{?_smp_mflags}    V=1 VERBOSE=1
 
 
 %install
-export SOURCE_DATE_EPOCH=1640218637
+export SOURCE_DATE_EPOCH=1640505188
 rm -rf %{buildroot}
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+## altflags1 content
+## altflags1
+unset ASFLAGS
+export CFLAGS="-g3 -ggdb -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export ASMFLAGS="-g3 -ggdb -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+## -fno-tree-vectorize: disable -ftree-vectorize thus disable -ftree-loop-vectorize and -ftree-slp-vectorize -fopt-info-vec
+## -Ofast -ffast-math
+## -funroll-loops maybe dangerous
+## -Wl,-z,max-page-size=0x1000
+## -pthread -lpthread
+## -Wl,-Bsymbolic-functions
+export CXXFLAGS="-g3 -ggdb -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+#
+export FCFLAGS="-g3 -ggdb -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export FFLAGS="-g3 -ggdb -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+#
+export LDFLAGS="-g3 -ggdb -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+#
+export AR=/usr/bin/gcc-ar
+export RANLIB=/usr/bin/gcc-ranlib
+export NM=/usr/bin/gcc-nm
+#
+export MAKEFLAGS=%{?_smp_mflags}
+#
+%global _lto_cflags 1
+#global _lto_cflags %{nil}
+%global _disable_maintainer_mode 1
+#%global _disable_maintainer_mode %{nil}
+#
+export CCACHE_DISABLE=true
+export CCACHE_NOHASHDIR=true
+export CCACHE_CPP2=true
+export CCACHE_SLOPPINESS=pch_defines,time_macros,locale,file_stat_matches,file_stat_matches_ctime,include_file_ctime,include_file_mtime,modules,system_headers,clang_index_store,file_macro
+#export CCACHE_SLOPPINESS=modules,include_file_mtime,include_file_ctime,time_macros,pch_defines,file_stat_matches,clang_index_store,system_headers,locale
+#export CCACHE_SLOPPINESS=pch_defines,time_macros,locale,clang_index_store,file_macro
+export CCACHE_DIR=/var/tmp/ccache
+export CCACHE_BASEDIR=/builddir/build/BUILD
+#export CCACHE_LOGFILE=/var/tmp/ccache/cache.debug
+#export CCACHE_DEBUG=true
+#export CCACHE_NODIRECT=true
+#
+export PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/usr/share/pkgconfig"
+#
+export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
+#
+export LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
+#
+export PATH="/usr/lib64/ccache/bin:/usr/local/cuda/bin:/usr/nvidia/bin:/usr/bin/haswell:/usr/bin:/usr/sbin"
+#
+export CPATH="/usr/local/cuda/include"
+#
+export DISPLAY=:0
+export __GL_SYNC_TO_VBLANK=1
+export __GL_SYNC_DISPLAY_DEVICE=HDMI-0
+export VDPAU_NVIDIA_SYNC_DISPLAY_DEVICE=HDMI-0
+export LANG=en_US.UTF-8
+export XDG_CONFIG_DIRS=/usr/share/xdg:/etc/xdg
+export XDG_SEAT=seat0
+export XDG_SESSION_TYPE=tty
+export XDG_CURRENT_DESKTOP=KDE
+export XDG_SESSION_CLASS=user
+export XDG_VTNR=1
+export XDG_SESSION_ID=1
+export XDG_RUNTIME_DIR=/run/user/1000
+export XDG_DATA_DIRS=/usr/local/share:/usr/share
+export KDE_SESSION_VERSION=5
+export KDE_SESSION_UID=1000
+export KDE_FULL_SESSION=true
+export KDE_APPLICATIONS_AS_SCOPE=1
+export VDPAU_DRIVER=nvidia
+export LIBVA_DRIVER_NAME=vdpau
+export LIBVA_DRIVERS_PATH=/usr/lib64/dri
+export GTK_RC_FILES=/etc/gtk/gtkrc
+export FONTCONFIG_PATH="/usr/share/defaults/fonts"
+export GTK_IM_MODULE="xim"
+export QT_IM_MODULE="cedilla"
+export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
+export PLASMA_USE_QT_SCALING=1
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+## altflags1 end
 %make_install
+## install_append content
+# ln -sf /usr/lib64/calf/libcalf.so %{buildroot}/usr/lib64/calf/calf.so
+## install_append end
 
 %files
 %defattr(-,root,root,-)
-
-%files data
-%defattr(-,root,root,-)
-/usr/share/applications/calf.desktop
-/usr/share/bash-completion/completions/calf
-/usr/share/calf/calf-gui.xml
-/usr/share/calf/gui-analyzer.xml
-/usr/share/calf/gui-bassenhancer.xml
-/usr/share/calf/gui-compdelay.xml
-/usr/share/calf/gui-compressor.xml
-/usr/share/calf/gui-crusher.xml
-/usr/share/calf/gui-deesser.xml
-/usr/share/calf/gui-emphasis.xml
-/usr/share/calf/gui-envelopefilter.xml
-/usr/share/calf/gui-eq12.xml
-/usr/share/calf/gui-eq30.xml
-/usr/share/calf/gui-eq5.xml
-/usr/share/calf/gui-eq8.xml
-/usr/share/calf/gui-exciter.xml
-/usr/share/calf/gui-filter.xml
-/usr/share/calf/gui-filterclavier.xml
-/usr/share/calf/gui-flanger.xml
-/usr/share/calf/gui-fluidsynth.xml
-/usr/share/calf/gui-gate.xml
-/usr/share/calf/gui-haasenhancer.xml
-/usr/share/calf/gui-limiter.xml
-/usr/share/calf/gui-mono.xml
-/usr/share/calf/gui-monocompressor.xml
-/usr/share/calf/gui-monosynth.xml
-/usr/share/calf/gui-multibandcompressor.xml
-/usr/share/calf/gui-multibandenhancer.xml
-/usr/share/calf/gui-multibandgate.xml
-/usr/share/calf/gui-multibandlimiter.xml
-/usr/share/calf/gui-multichorus.xml
-/usr/share/calf/gui-multispread.xml
-/usr/share/calf/gui-organ.xml
-/usr/share/calf/gui-phaser.xml
-/usr/share/calf/gui-pitch.xml
-/usr/share/calf/gui-psyclipper.xml
-/usr/share/calf/gui-pulsator.xml
-/usr/share/calf/gui-reverb.xml
-/usr/share/calf/gui-reversedelay.xml
-/usr/share/calf/gui-ringmodulator.xml
-/usr/share/calf/gui-rotaryspeaker.xml
-/usr/share/calf/gui-saturator.xml
-/usr/share/calf/gui-sidechaincompressor.xml
-/usr/share/calf/gui-sidechaingate.xml
-/usr/share/calf/gui-sidechainlimiter.xml
-/usr/share/calf/gui-stereo.xml
-/usr/share/calf/gui-tapesimulator.xml
-/usr/share/calf/gui-transientdesigner.xml
-/usr/share/calf/gui-vintagedelay.xml
-/usr/share/calf/gui-vinyl.xml
-/usr/share/calf/gui-vocoder.xml
-/usr/share/calf/gui-wavetable.xml
-/usr/share/calf/gui-xover2.xml
-/usr/share/calf/gui-xover3.xml
-/usr/share/calf/gui-xover4.xml
-/usr/share/calf/gui/analyzer.xml
-/usr/share/calf/gui/bassenhancer.xml
-/usr/share/calf/gui/compdelay.xml
-/usr/share/calf/gui/compressor.xml
-/usr/share/calf/gui/crusher.xml
-/usr/share/calf/gui/deesser.xml
-/usr/share/calf/gui/emphasis.xml
-/usr/share/calf/gui/envelopefilter.xml
-/usr/share/calf/gui/eq12.xml
-/usr/share/calf/gui/eq30.xml
-/usr/share/calf/gui/eq5.xml
-/usr/share/calf/gui/eq8.xml
-/usr/share/calf/gui/exciter.xml
-/usr/share/calf/gui/filter.xml
-/usr/share/calf/gui/filterclavier.xml
-/usr/share/calf/gui/flanger.xml
-/usr/share/calf/gui/fluidsynth.xml
-/usr/share/calf/gui/gate.xml
-/usr/share/calf/gui/haasenhancer.xml
-/usr/share/calf/gui/limiter.xml
-/usr/share/calf/gui/mono.xml
-/usr/share/calf/gui/monocompressor.xml
-/usr/share/calf/gui/monosynth.xml
-/usr/share/calf/gui/multibandcompressor.xml
-/usr/share/calf/gui/multibandenhancer.xml
-/usr/share/calf/gui/multibandgate.xml
-/usr/share/calf/gui/multibandlimiter.xml
-/usr/share/calf/gui/multichorus.xml
-/usr/share/calf/gui/multispread.xml
-/usr/share/calf/gui/organ.xml
-/usr/share/calf/gui/phaser.xml
-/usr/share/calf/gui/pitch.xml
-/usr/share/calf/gui/psyclipper.xml
-/usr/share/calf/gui/pulsator.xml
-/usr/share/calf/gui/reverb.xml
-/usr/share/calf/gui/reversedelay.xml
-/usr/share/calf/gui/ringmodulator.xml
-/usr/share/calf/gui/rotaryspeaker.xml
-/usr/share/calf/gui/saturator.xml
-/usr/share/calf/gui/sidechaincompressor.xml
-/usr/share/calf/gui/sidechaingate.xml
-/usr/share/calf/gui/sidechainlimiter.xml
-/usr/share/calf/gui/stereo.xml
-/usr/share/calf/gui/tapesimulator.xml
-/usr/share/calf/gui/transientdesigner.xml
-/usr/share/calf/gui/vintagedelay.xml
-/usr/share/calf/gui/vinyl.xml
-/usr/share/calf/gui/vocoder.xml
-/usr/share/calf/gui/wavetable.xml
-/usr/share/calf/gui/xover2.xml
-/usr/share/calf/gui/xover3.xml
-/usr/share/calf/gui/xover4.xml
-/usr/share/calf/icons/LV2/Allpass.svg
-/usr/share/calf/icons/LV2/Amplifier.svg
-/usr/share/calf/icons/LV2/Analyser.svg
-/usr/share/calf/icons/LV2/Bandpass.svg
-/usr/share/calf/icons/LV2/Chorus.svg
-/usr/share/calf/icons/LV2/Comb.svg
-/usr/share/calf/icons/LV2/Compressor.svg
-/usr/share/calf/icons/LV2/Constant.svg
-/usr/share/calf/icons/LV2/Converter.svg
-/usr/share/calf/icons/LV2/Delay.svg
-/usr/share/calf/icons/LV2/Distortion.svg
-/usr/share/calf/icons/LV2/Dynamics.svg
-/usr/share/calf/icons/LV2/EQ.svg
-/usr/share/calf/icons/LV2/Envelope.svg
-/usr/share/calf/icons/LV2/Expander.svg
-/usr/share/calf/icons/LV2/Filter.svg
-/usr/share/calf/icons/LV2/Flanger.svg
-/usr/share/calf/icons/LV2/Function.svg
-/usr/share/calf/icons/LV2/Gate.svg
-/usr/share/calf/icons/LV2/Generator.svg
-/usr/share/calf/icons/LV2/Highpass.svg
-/usr/share/calf/icons/LV2/Instrument.svg
-/usr/share/calf/icons/LV2/Limiter.svg
-/usr/share/calf/icons/LV2/Mixer.svg
-/usr/share/calf/icons/LV2/Modulator.svg
-/usr/share/calf/icons/LV2/MultiEQ.svg
-/usr/share/calf/icons/LV2/Oscillator.svg
-/usr/share/calf/icons/LV2/ParaEQ.svg
-/usr/share/calf/icons/LV2/Phaser.svg
-/usr/share/calf/icons/LV2/Pitch.svg
-/usr/share/calf/icons/LV2/Reverb.svg
-/usr/share/calf/icons/LV2/Simulator.svg
-/usr/share/calf/icons/LV2/Spatial.svg
-/usr/share/calf/icons/LV2/Spectral.svg
-/usr/share/calf/icons/LV2/Utility.svg
-/usr/share/calf/icons/LV2/Waveshaper.svg
-/usr/share/calf/presets.xml
-/usr/share/calf/sf2/Crackle.sf2
-/usr/share/calf/sf2/Crinkle.sf2
-/usr/share/calf/sf2/Hum.sf2
-/usr/share/calf/sf2/Motor.sf2
-/usr/share/calf/sf2/Noise.sf2
-/usr/share/calf/sf2/Rumble.sf2
-/usr/share/calf/sf2/Static.sf2
-/usr/share/calf/strips/bassenhancer.xml
-/usr/share/calf/strips/compdelay.xml
-/usr/share/calf/strips/compressor.xml
-/usr/share/calf/strips/crusher.xml
-/usr/share/calf/strips/deesser.xml
-/usr/share/calf/strips/emphasis.xml
-/usr/share/calf/strips/envelopefilter.xml
-/usr/share/calf/strips/eq12.xml
-/usr/share/calf/strips/eq30.xml
-/usr/share/calf/strips/eq5.xml
-/usr/share/calf/strips/eq8.xml
-/usr/share/calf/strips/exciter.xml
-/usr/share/calf/strips/filter.xml
-/usr/share/calf/strips/filterclavier.xml
-/usr/share/calf/strips/flanger.xml
-/usr/share/calf/strips/fluidsynth.xml
-/usr/share/calf/strips/gate.xml
-/usr/share/calf/strips/haasenhancer.xml
-/usr/share/calf/strips/limiter.xml
-/usr/share/calf/strips/mono.xml
-/usr/share/calf/strips/monocompressor.xml
-/usr/share/calf/strips/monosynth.xml
-/usr/share/calf/strips/multibandcompressor.xml
-/usr/share/calf/strips/multibandenhancer.xml
-/usr/share/calf/strips/multibandgate.xml
-/usr/share/calf/strips/multibandlimiter.xml
-/usr/share/calf/strips/multichorus.xml
-/usr/share/calf/strips/multispread.xml
-/usr/share/calf/strips/organ.xml
-/usr/share/calf/strips/phaser.xml
-/usr/share/calf/strips/psyclipper.xml
-/usr/share/calf/strips/pulsator.xml
-/usr/share/calf/strips/reverb.xml
-/usr/share/calf/strips/reversedelay.xml
-/usr/share/calf/strips/ringmodulator.xml
-/usr/share/calf/strips/rotaryspeaker.xml
-/usr/share/calf/strips/saturator.xml
-/usr/share/calf/strips/sidechaincompressor.xml
-/usr/share/calf/strips/sidechaingate.xml
-/usr/share/calf/strips/sidechainlimiter.xml
-/usr/share/calf/strips/stereo.xml
-/usr/share/calf/strips/tapesimulator.xml
-/usr/share/calf/strips/transientdesigner.xml
-/usr/share/calf/strips/vintagedelay.xml
-/usr/share/calf/strips/vinyl.xml
-/usr/share/calf/strips/vocoder.xml
-/usr/share/calf/strips/wavetable.xml
-/usr/share/calf/strips/xover2.xml
-/usr/share/calf/strips/xover3.xml
-/usr/share/calf/strips/xover4.xml
-/usr/share/calf/styles/Calf_0.0.19/background_menu.png
-/usr/share/calf/styles/Calf_0.0.19/background_plugin.png
-/usr/share/calf/styles/Calf_0.0.19/background_rack.png
-/usr/share/calf/styles/Calf_0.0.19/combo_arrow.png
-/usr/share/calf/styles/Calf_0.0.19/gtk.rc
-/usr/share/calf/styles/Calf_0.0.19/knob_1.png
-/usr/share/calf/styles/Calf_0.0.19/knob_2.png
-/usr/share/calf/styles/Calf_0.0.19/knob_3.png
-/usr/share/calf/styles/Calf_0.0.19/knob_4.png
-/usr/share/calf/styles/Calf_0.0.19/knob_5.png
-/usr/share/calf/styles/Calf_0.0.19/light_bottom.png
-/usr/share/calf/styles/Calf_0.0.19/light_top.png
-/usr/share/calf/styles/Calf_0.0.19/notebook_screw.png
-/usr/share/calf/styles/Calf_0.0.19/side_d_e.png
-/usr/share/calf/styles/Calf_0.0.19/side_d_ne.png
-/usr/share/calf/styles/Calf_0.0.19/side_d_nw.png
-/usr/share/calf/styles/Calf_0.0.19/side_d_se.png
-/usr/share/calf/styles/Calf_0.0.19/side_d_sw.png
-/usr/share/calf/styles/Calf_0.0.19/side_d_w.png
-/usr/share/calf/styles/Calf_0.0.19/side_e.png
-/usr/share/calf/styles/Calf_0.0.19/side_ne.png
-/usr/share/calf/styles/Calf_0.0.19/side_nw.png
-/usr/share/calf/styles/Calf_0.0.19/side_se.png
-/usr/share/calf/styles/Calf_0.0.19/side_sw.png
-/usr/share/calf/styles/Calf_0.0.19/side_w.png
-/usr/share/calf/styles/Calf_0.0.19/slider_1_horiz.png
-/usr/share/calf/styles/Calf_0.0.19/slider_1_vert.png
-/usr/share/calf/styles/Calf_0.0.19/slider_2_horiz.png
-/usr/share/calf/styles/Calf_0.0.19/slider_2_vert.png
-/usr/share/calf/styles/Calf_0.0.19/tap_active.png
-/usr/share/calf/styles/Calf_0.0.19/tap_inactive.png
-/usr/share/calf/styles/Calf_0.0.19/tap_prelight.png
-/usr/share/calf/styles/Calf_0.0.19/toggle_0.png
-/usr/share/calf/styles/Calf_0.0.19/toggle_1.png
-/usr/share/calf/styles/Calf_0.0.19/toggle_2.png
-/usr/share/calf/styles/Calf_0.0.19/tubeH1.png
-/usr/share/calf/styles/Calf_0.0.19/tubeH2.png
-/usr/share/calf/styles/Calf_0.0.19/tubeV1.png
-/usr/share/calf/styles/Calf_0.0.19/tubeV2.png
-/usr/share/calf/styles/Calf_Default/background_menu.png
-/usr/share/calf/styles/Calf_Default/background_plugin.png
-/usr/share/calf/styles/Calf_Default/background_rack.png
-/usr/share/calf/styles/Calf_Default/combo_arrow.png
-/usr/share/calf/styles/Calf_Default/gtk.rc
-/usr/share/calf/styles/Calf_Default/knob_1.png
-/usr/share/calf/styles/Calf_Default/knob_2.png
-/usr/share/calf/styles/Calf_Default/knob_3.png
-/usr/share/calf/styles/Calf_Default/knob_4.png
-/usr/share/calf/styles/Calf_Default/knob_5.png
-/usr/share/calf/styles/Calf_Default/light_bottom.png
-/usr/share/calf/styles/Calf_Default/light_top.png
-/usr/share/calf/styles/Calf_Default/notebook_screw.png
-/usr/share/calf/styles/Calf_Default/side_d_e.png
-/usr/share/calf/styles/Calf_Default/side_d_ne.png
-/usr/share/calf/styles/Calf_Default/side_d_nw.png
-/usr/share/calf/styles/Calf_Default/side_d_se.png
-/usr/share/calf/styles/Calf_Default/side_d_sw.png
-/usr/share/calf/styles/Calf_Default/side_d_w.png
-/usr/share/calf/styles/Calf_Default/side_e.png
-/usr/share/calf/styles/Calf_Default/side_ne.png
-/usr/share/calf/styles/Calf_Default/side_nw.png
-/usr/share/calf/styles/Calf_Default/side_se.png
-/usr/share/calf/styles/Calf_Default/side_sw.png
-/usr/share/calf/styles/Calf_Default/side_w.png
-/usr/share/calf/styles/Calf_Default/slider_1_horiz.png
-/usr/share/calf/styles/Calf_Default/slider_1_vert.png
-/usr/share/calf/styles/Calf_Default/slider_2_horiz.png
-/usr/share/calf/styles/Calf_Default/slider_2_vert.png
-/usr/share/calf/styles/Calf_Default/tap_active.png
-/usr/share/calf/styles/Calf_Default/tap_inactive.png
-/usr/share/calf/styles/Calf_Default/tap_prelight.png
-/usr/share/calf/styles/Calf_Default/toggle_0.png
-/usr/share/calf/styles/Calf_Default/toggle_1.png
-/usr/share/calf/styles/Calf_Default/toggle_2.png
-/usr/share/calf/styles/Calf_Default/toggle_2_block.png
-/usr/share/calf/styles/Calf_Default/toggle_2_bypass.png
-/usr/share/calf/styles/Calf_Default/toggle_2_bypass2.png
-/usr/share/calf/styles/Calf_Default/toggle_2_connect.png
-/usr/share/calf/styles/Calf_Default/toggle_2_fast.png
-/usr/share/calf/styles/Calf_Default/toggle_2_gui.png
-/usr/share/calf/styles/Calf_Default/toggle_2_listen.png
-/usr/share/calf/styles/Calf_Default/toggle_2_logarithmic.png
-/usr/share/calf/styles/Calf_Default/toggle_2_magnetical.png
-/usr/share/calf/styles/Calf_Default/toggle_2_mono.png
-/usr/share/calf/styles/Calf_Default/toggle_2_muffle.png
-/usr/share/calf/styles/Calf_Default/toggle_2_mute.png
-/usr/share/calf/styles/Calf_Default/toggle_2_pauseplay.png
-/usr/share/calf/styles/Calf_Default/toggle_2_phase.png
-/usr/share/calf/styles/Calf_Default/toggle_2_sc_comp.png
-/usr/share/calf/styles/Calf_Default/toggle_2_sc_filter.png
-/usr/share/calf/styles/Calf_Default/toggle_2_softclip.png
-/usr/share/calf/styles/Calf_Default/toggle_2_solo.png
-/usr/share/calf/styles/Calf_Default/toggle_2_sync.png
-/usr/share/calf/styles/Calf_Default/toggle_2_void.png
-/usr/share/calf/styles/Calf_Default/tubeH1.png
-/usr/share/calf/styles/Calf_Default/tubeH2.png
-/usr/share/calf/styles/Calf_Default/tubeV1.png
-/usr/share/calf/styles/Calf_Default/tubeV2.png
-/usr/share/calf/styles/Calf_Flat_Default/background_menu.png
-/usr/share/calf/styles/Calf_Flat_Default/background_plugin.png
-/usr/share/calf/styles/Calf_Flat_Default/background_rack.png
-/usr/share/calf/styles/Calf_Flat_Default/combo_arrow.png
-/usr/share/calf/styles/Calf_Flat_Default/gtk.rc
-/usr/share/calf/styles/Calf_Flat_Default/knob_1.png
-/usr/share/calf/styles/Calf_Flat_Default/knob_2.png
-/usr/share/calf/styles/Calf_Flat_Default/knob_3.png
-/usr/share/calf/styles/Calf_Flat_Default/knob_4.png
-/usr/share/calf/styles/Calf_Flat_Default/knob_5.png
-/usr/share/calf/styles/Calf_Flat_Default/light_bottom.png
-/usr/share/calf/styles/Calf_Flat_Default/light_top.png
-/usr/share/calf/styles/Calf_Flat_Default/notebook_screw.png
-/usr/share/calf/styles/Calf_Flat_Default/side_d_e.png
-/usr/share/calf/styles/Calf_Flat_Default/side_d_ne.png
-/usr/share/calf/styles/Calf_Flat_Default/side_d_nw.png
-/usr/share/calf/styles/Calf_Flat_Default/side_d_se.png
-/usr/share/calf/styles/Calf_Flat_Default/side_d_sw.png
-/usr/share/calf/styles/Calf_Flat_Default/side_d_w.png
-/usr/share/calf/styles/Calf_Flat_Default/side_e.png
-/usr/share/calf/styles/Calf_Flat_Default/side_ne.png
-/usr/share/calf/styles/Calf_Flat_Default/side_nw.png
-/usr/share/calf/styles/Calf_Flat_Default/side_se.png
-/usr/share/calf/styles/Calf_Flat_Default/side_sw.png
-/usr/share/calf/styles/Calf_Flat_Default/side_w.png
-/usr/share/calf/styles/Calf_Flat_Default/slider_1_horiz.png
-/usr/share/calf/styles/Calf_Flat_Default/slider_1_vert.png
-/usr/share/calf/styles/Calf_Flat_Default/slider_2_horiz.png
-/usr/share/calf/styles/Calf_Flat_Default/slider_2_vert.png
-/usr/share/calf/styles/Calf_Flat_Default/tap_active.png
-/usr/share/calf/styles/Calf_Flat_Default/tap_inactive.png
-/usr/share/calf/styles/Calf_Flat_Default/tap_prelight.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_0.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_1.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_block.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_bypass.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_bypass2.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_connect.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_fast.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_gui.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_listen.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_logarithmic.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_magnetical.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_mono.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_muffle.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_mute.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_pauseplay.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_phase.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_sc_comp.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_sc_filter.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_softclip.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_solo.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_sync.png
-/usr/share/calf/styles/Calf_Flat_Default/toggle_2_void.png
-/usr/share/calf/styles/Calf_Flat_Default/tubeH1.png
-/usr/share/calf/styles/Calf_Flat_Default/tubeH2.png
-/usr/share/calf/styles/Calf_Flat_Default/tubeV1.png
-/usr/share/calf/styles/Calf_Flat_Default/tubeV2.png
-/usr/share/calf/styles/Calf_Hybreed/background_menu.png
-/usr/share/calf/styles/Calf_Hybreed/background_plugin.png
-/usr/share/calf/styles/Calf_Hybreed/combo_arrow.png
-/usr/share/calf/styles/Calf_Hybreed/gtk.rc
-/usr/share/calf/styles/Calf_Hybreed/knob_1.png
-/usr/share/calf/styles/Calf_Hybreed/knob_2.png
-/usr/share/calf/styles/Calf_Hybreed/knob_3.png
-/usr/share/calf/styles/Calf_Hybreed/knob_4.png
-/usr/share/calf/styles/Calf_Hybreed/knob_5.png
-/usr/share/calf/styles/Calf_Hybreed/notebook_screw.png
-/usr/share/calf/styles/Calf_Hybreed/side_d_e.png
-/usr/share/calf/styles/Calf_Hybreed/side_d_ne.png
-/usr/share/calf/styles/Calf_Hybreed/side_d_nw.png
-/usr/share/calf/styles/Calf_Hybreed/side_d_se.png
-/usr/share/calf/styles/Calf_Hybreed/side_d_sw.png
-/usr/share/calf/styles/Calf_Hybreed/side_d_w.png
-/usr/share/calf/styles/Calf_Hybreed/side_e.png
-/usr/share/calf/styles/Calf_Hybreed/side_ne.png
-/usr/share/calf/styles/Calf_Hybreed/side_nw.png
-/usr/share/calf/styles/Calf_Hybreed/side_se.png
-/usr/share/calf/styles/Calf_Hybreed/side_sw.png
-/usr/share/calf/styles/Calf_Hybreed/side_w.png
-/usr/share/calf/styles/Calf_Hybreed/slider_1_horiz.png
-/usr/share/calf/styles/Calf_Hybreed/slider_1_vert.png
-/usr/share/calf/styles/Calf_Hybreed/slider_2_horiz.png
-/usr/share/calf/styles/Calf_Hybreed/slider_2_vert.png
-/usr/share/calf/styles/Calf_Hybreed/tap_active.png
-/usr/share/calf/styles/Calf_Hybreed/tap_inactive.png
-/usr/share/calf/styles/Calf_Hybreed/tap_prelight.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_0.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_1.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_block.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_bypass.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_bypass2.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_fast.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_listen.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_logarithmic.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_magnetical.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_mono.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_muffle.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_mute.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_pauseplay.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_phase.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_sc_comp.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_sc_filter.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_softclip.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_solo.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_sync.png
-/usr/share/calf/styles/Calf_Hybreed/toggle_2_void.png
-/usr/share/calf/styles/Calf_Hybreed/tubeH1.png
-/usr/share/calf/styles/Calf_Hybreed/tubeH2.png
-/usr/share/calf/styles/Calf_Hybreed/tubeV1.png
-/usr/share/calf/styles/Calf_Hybreed/tubeV2.png
-/usr/share/calf/styles/Calf_Lost_Wages/background_menu.png
-/usr/share/calf/styles/Calf_Lost_Wages/background_plugin.png
-/usr/share/calf/styles/Calf_Lost_Wages/combo_arrow.png
-/usr/share/calf/styles/Calf_Lost_Wages/gtk.rc
-/usr/share/calf/styles/Calf_Lost_Wages/knob_1.png
-/usr/share/calf/styles/Calf_Lost_Wages/knob_2.png
-/usr/share/calf/styles/Calf_Lost_Wages/knob_3.png
-/usr/share/calf/styles/Calf_Lost_Wages/knob_4.png
-/usr/share/calf/styles/Calf_Lost_Wages/knob_5.png
-/usr/share/calf/styles/Calf_Lost_Wages/light_bottom.png
-/usr/share/calf/styles/Calf_Lost_Wages/light_top.png
-/usr/share/calf/styles/Calf_Lost_Wages/notebook_screw.png
-/usr/share/calf/styles/Calf_Lost_Wages/side_d_e.png
-/usr/share/calf/styles/Calf_Lost_Wages/side_d_ne.png
-/usr/share/calf/styles/Calf_Lost_Wages/side_d_nw.png
-/usr/share/calf/styles/Calf_Lost_Wages/side_d_se.png
-/usr/share/calf/styles/Calf_Lost_Wages/side_d_sw.png
-/usr/share/calf/styles/Calf_Lost_Wages/side_d_w.png
-/usr/share/calf/styles/Calf_Lost_Wages/side_e.png
-/usr/share/calf/styles/Calf_Lost_Wages/side_ne.png
-/usr/share/calf/styles/Calf_Lost_Wages/side_nw.png
-/usr/share/calf/styles/Calf_Lost_Wages/side_se.png
-/usr/share/calf/styles/Calf_Lost_Wages/side_sw.png
-/usr/share/calf/styles/Calf_Lost_Wages/side_w.png
-/usr/share/calf/styles/Calf_Lost_Wages/slider_1_horiz.png
-/usr/share/calf/styles/Calf_Lost_Wages/slider_1_vert.png
-/usr/share/calf/styles/Calf_Lost_Wages/slider_2_horiz.png
-/usr/share/calf/styles/Calf_Lost_Wages/slider_2_vert.png
-/usr/share/calf/styles/Calf_Lost_Wages/tap_active.png
-/usr/share/calf/styles/Calf_Lost_Wages/tap_inactive.png
-/usr/share/calf/styles/Calf_Lost_Wages/tap_prelight.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_0.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_1.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_block.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_bypass.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_bypass2.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_fast.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_listen.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_logarithmic.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_magnetical.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_mono.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_muffle.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_mute.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_pauseplay.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_phase.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_sc_comp.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_sc_filter.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_softclip.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_solo.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_sync.png
-/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_void.png
-/usr/share/calf/styles/Calf_Lost_Wages/tubeH1.png
-/usr/share/calf/styles/Calf_Lost_Wages/tubeH2.png
-/usr/share/calf/styles/Calf_Lost_Wages/tubeV1.png
-/usr/share/calf/styles/Calf_Lost_Wages/tubeV2.png
-/usr/share/calf/styles/Calf_Midnight/background.png
-/usr/share/calf/styles/Calf_Midnight/background_menu.png
-/usr/share/calf/styles/Calf_Midnight/combo_arrow.png
-/usr/share/calf/styles/Calf_Midnight/gtk.rc
-/usr/share/calf/styles/Calf_Midnight/knob_1.png
-/usr/share/calf/styles/Calf_Midnight/knob_2.png
-/usr/share/calf/styles/Calf_Midnight/knob_3.png
-/usr/share/calf/styles/Calf_Midnight/knob_4.png
-/usr/share/calf/styles/Calf_Midnight/knob_5.png
-/usr/share/calf/styles/Calf_Midnight/light_bottom.png
-/usr/share/calf/styles/Calf_Midnight/light_top.png
-/usr/share/calf/styles/Calf_Midnight/notebook_screw.png
-/usr/share/calf/styles/Calf_Midnight/side_d_e.png
-/usr/share/calf/styles/Calf_Midnight/side_d_ne.png
-/usr/share/calf/styles/Calf_Midnight/side_d_nw.png
-/usr/share/calf/styles/Calf_Midnight/side_d_se.png
-/usr/share/calf/styles/Calf_Midnight/side_d_sw.png
-/usr/share/calf/styles/Calf_Midnight/side_d_w.png
-/usr/share/calf/styles/Calf_Midnight/side_e.png
-/usr/share/calf/styles/Calf_Midnight/side_ne.png
-/usr/share/calf/styles/Calf_Midnight/side_nw.png
-/usr/share/calf/styles/Calf_Midnight/side_se.png
-/usr/share/calf/styles/Calf_Midnight/side_sw.png
-/usr/share/calf/styles/Calf_Midnight/side_w.png
-/usr/share/calf/styles/Calf_Midnight/slider_1_horiz.png
-/usr/share/calf/styles/Calf_Midnight/slider_1_vert.png
-/usr/share/calf/styles/Calf_Midnight/slider_2_horiz.png
-/usr/share/calf/styles/Calf_Midnight/slider_2_vert.png
-/usr/share/calf/styles/Calf_Midnight/tap_active.png
-/usr/share/calf/styles/Calf_Midnight/tap_inactive.png
-/usr/share/calf/styles/Calf_Midnight/tap_prelight.png
-/usr/share/calf/styles/Calf_Midnight/toggle_0.png
-/usr/share/calf/styles/Calf_Midnight/toggle_1.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_block.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_bypass.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_bypass2.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_fast.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_listen.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_logarithmic.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_magnetical.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_mono.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_muffle.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_mute.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_pauseplay.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_phase.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_sc_comp.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_sc_filter.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_softclip.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_solo.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_sync.png
-/usr/share/calf/styles/Calf_Midnight/toggle_2_void.png
-/usr/share/calf/styles/Calf_Midnight/tubeH1.png
-/usr/share/calf/styles/Calf_Midnight/tubeH2.png
-/usr/share/calf/styles/Calf_Midnight/tubeV1.png
-/usr/share/calf/styles/Calf_Midnight/tubeV2.png
-/usr/share/calf/styles/Calf_Orange/background_menu.png
-/usr/share/calf/styles/Calf_Orange/background_plugin.png
-/usr/share/calf/styles/Calf_Orange/combo_arrow.png
-/usr/share/calf/styles/Calf_Orange/gtk.rc
-/usr/share/calf/styles/Calf_Orange/knob_1.png
-/usr/share/calf/styles/Calf_Orange/knob_2.png
-/usr/share/calf/styles/Calf_Orange/knob_3.png
-/usr/share/calf/styles/Calf_Orange/knob_4.png
-/usr/share/calf/styles/Calf_Orange/knob_5.png
-/usr/share/calf/styles/Calf_Orange/light_bottom.png
-/usr/share/calf/styles/Calf_Orange/light_top.png
-/usr/share/calf/styles/Calf_Orange/notebook_screw.png
-/usr/share/calf/styles/Calf_Orange/side_d_e.png
-/usr/share/calf/styles/Calf_Orange/side_d_ne.png
-/usr/share/calf/styles/Calf_Orange/side_d_nw.png
-/usr/share/calf/styles/Calf_Orange/side_d_se.png
-/usr/share/calf/styles/Calf_Orange/side_d_sw.png
-/usr/share/calf/styles/Calf_Orange/side_d_w.png
-/usr/share/calf/styles/Calf_Orange/side_e.png
-/usr/share/calf/styles/Calf_Orange/side_ne.png
-/usr/share/calf/styles/Calf_Orange/side_nw.png
-/usr/share/calf/styles/Calf_Orange/side_se.png
-/usr/share/calf/styles/Calf_Orange/side_sw.png
-/usr/share/calf/styles/Calf_Orange/side_w.png
-/usr/share/calf/styles/Calf_Orange/slider_1_horiz.png
-/usr/share/calf/styles/Calf_Orange/slider_1_vert.png
-/usr/share/calf/styles/Calf_Orange/slider_2_horiz.png
-/usr/share/calf/styles/Calf_Orange/slider_2_vert.png
-/usr/share/calf/styles/Calf_Orange/tap_active.png
-/usr/share/calf/styles/Calf_Orange/tap_inactive.png
-/usr/share/calf/styles/Calf_Orange/tap_prelight.png
-/usr/share/calf/styles/Calf_Orange/toggle_0.png
-/usr/share/calf/styles/Calf_Orange/toggle_1.png
-/usr/share/calf/styles/Calf_Orange/toggle_2.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_block.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_bypass.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_bypass2.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_fast.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_listen.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_logarithmic.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_magnetical.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_mono.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_muffle.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_mute.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_pauseplay.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_phase.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_sc_comp.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_sc_filter.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_softclip.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_solo.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_sync.png
-/usr/share/calf/styles/Calf_Orange/toggle_2_void.png
-/usr/share/calf/styles/Calf_Orange/tubeH1.png
-/usr/share/calf/styles/Calf_Orange/tubeH2.png
-/usr/share/calf/styles/Calf_Orange/tubeV1.png
-/usr/share/calf/styles/Calf_Orange/tubeV2.png
-/usr/share/calf/styles/Calf_Wood/background_menu.png
-/usr/share/calf/styles/Calf_Wood/background_plugin.png
-/usr/share/calf/styles/Calf_Wood/combo_arrow.png
-/usr/share/calf/styles/Calf_Wood/gtk.rc
-/usr/share/calf/styles/Calf_Wood/knob_1.png
-/usr/share/calf/styles/Calf_Wood/knob_2.png
-/usr/share/calf/styles/Calf_Wood/knob_3.png
-/usr/share/calf/styles/Calf_Wood/knob_4.png
-/usr/share/calf/styles/Calf_Wood/knob_5.png
-/usr/share/calf/styles/Calf_Wood/notebook_screw.png
-/usr/share/calf/styles/Calf_Wood/side_d_e.png
-/usr/share/calf/styles/Calf_Wood/side_d_ne.png
-/usr/share/calf/styles/Calf_Wood/side_d_nw.png
-/usr/share/calf/styles/Calf_Wood/side_d_se.png
-/usr/share/calf/styles/Calf_Wood/side_d_sw.png
-/usr/share/calf/styles/Calf_Wood/side_d_w.png
-/usr/share/calf/styles/Calf_Wood/side_e.png
-/usr/share/calf/styles/Calf_Wood/side_ne.png
-/usr/share/calf/styles/Calf_Wood/side_nw.png
-/usr/share/calf/styles/Calf_Wood/side_se.png
-/usr/share/calf/styles/Calf_Wood/side_sw.png
-/usr/share/calf/styles/Calf_Wood/side_w.png
-/usr/share/calf/styles/Calf_Wood/slider_1_horiz.png
-/usr/share/calf/styles/Calf_Wood/slider_1_vert.png
-/usr/share/calf/styles/Calf_Wood/slider_2_horiz.png
-/usr/share/calf/styles/Calf_Wood/slider_2_vert.png
-/usr/share/calf/styles/Calf_Wood/tap_active.png
-/usr/share/calf/styles/Calf_Wood/tap_inactive.png
-/usr/share/calf/styles/Calf_Wood/tap_prelight.png
-/usr/share/calf/styles/Calf_Wood/toggle_0.png
-/usr/share/calf/styles/Calf_Wood/toggle_1.png
-/usr/share/calf/styles/Calf_Wood/toggle_2.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_block.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_bypass.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_bypass2.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_fast.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_listen.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_logarithmic.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_magnetical.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_mono.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_muffle.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_mute.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_pauseplay.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_phase.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_sc_comp.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_sc_filter.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_softclip.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_solo.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_sync.png
-/usr/share/calf/styles/Calf_Wood/toggle_2_void.png
-/usr/share/calf/styles/Calf_Wood/tubeH1.png
-/usr/share/calf/styles/Calf_Wood/tubeH2.png
-/usr/share/calf/styles/Calf_Wood/tubeV1.png
-/usr/share/calf/styles/Calf_Wood/tubeV2.png
-/usr/share/icons/hicolor/128x128/apps/calf.png
-/usr/share/icons/hicolor/128x128/apps/calf_plugin.png
-/usr/share/icons/hicolor/16x16/apps/calf.png
-/usr/share/icons/hicolor/16x16/apps/calf_plugin.png
-/usr/share/icons/hicolor/22x22/apps/calf.png
-/usr/share/icons/hicolor/22x22/apps/calf_plugin.png
-/usr/share/icons/hicolor/24x24/apps/calf.png
-/usr/share/icons/hicolor/24x24/apps/calf_plugin.png
-/usr/share/icons/hicolor/256x256/apps/calf.png
-/usr/share/icons/hicolor/256x256/apps/calf_plugin.png
-/usr/share/icons/hicolor/32x32/apps/calf.png
-/usr/share/icons/hicolor/32x32/apps/calf_plugin.png
-/usr/share/icons/hicolor/48x48/apps/calf.png
-/usr/share/icons/hicolor/48x48/apps/calf_plugin.png
-/usr/share/icons/hicolor/64x64/apps/calf.png
-/usr/share/icons/hicolor/64x64/apps/calf_plugin.png
-/usr/share/icons/hicolor/scalable/apps/calf.svg
-/usr/share/icons/hicolor/scalable/apps/calf_plugin.svg
-
-%files dev
-%defattr(-,root,root,-)
-/usr/lib64/calf/libcalf.la
-/usr/lib64/calf/libcalf.so
-/usr/lib64/calf/libcalflv2gui.la
-/usr/lib64/calf/libcalflv2gui.so
-/usr/lib64/lv2/calf.lv2/Analyzer.ttl
-/usr/lib64/lv2/calf.lv2/BassEnhancer.ttl
-/usr/lib64/lv2/calf.lv2/CompensationDelay.ttl
-/usr/lib64/lv2/calf.lv2/Compressor.ttl
-/usr/lib64/lv2/calf.lv2/Crusher.ttl
-/usr/lib64/lv2/calf.lv2/Deesser.ttl
-/usr/lib64/lv2/calf.lv2/Emphasis.ttl
-/usr/lib64/lv2/calf.lv2/EnvelopeFilter.ttl
-/usr/lib64/lv2/calf.lv2/Equalizer12Band.ttl
-/usr/lib64/lv2/calf.lv2/Equalizer30Band.ttl
-/usr/lib64/lv2/calf.lv2/Equalizer5Band.ttl
-/usr/lib64/lv2/calf.lv2/Equalizer8Band.ttl
-/usr/lib64/lv2/calf.lv2/Exciter.ttl
-/usr/lib64/lv2/calf.lv2/Filter.ttl
-/usr/lib64/lv2/calf.lv2/Filterclavier.ttl
-/usr/lib64/lv2/calf.lv2/Flanger.ttl
-/usr/lib64/lv2/calf.lv2/Fluidsynth.ttl
-/usr/lib64/lv2/calf.lv2/Gate.ttl
-/usr/lib64/lv2/calf.lv2/HaasEnhancer.ttl
-/usr/lib64/lv2/calf.lv2/Limiter.ttl
-/usr/lib64/lv2/calf.lv2/MonoCompressor.ttl
-/usr/lib64/lv2/calf.lv2/MonoInput.ttl
-/usr/lib64/lv2/calf.lv2/Monosynth.ttl
-/usr/lib64/lv2/calf.lv2/MultiChorus.ttl
-/usr/lib64/lv2/calf.lv2/MultiSpread.ttl
-/usr/lib64/lv2/calf.lv2/MultibandCompressor.ttl
-/usr/lib64/lv2/calf.lv2/MultibandEnhancer.ttl
-/usr/lib64/lv2/calf.lv2/MultibandGate.ttl
-/usr/lib64/lv2/calf.lv2/MultibandLimiter.ttl
-/usr/lib64/lv2/calf.lv2/Organ.ttl
-/usr/lib64/lv2/calf.lv2/Phaser.ttl
-/usr/lib64/lv2/calf.lv2/Pitch.ttl
-/usr/lib64/lv2/calf.lv2/PsyClipper.ttl
-/usr/lib64/lv2/calf.lv2/Pulsator.ttl
-/usr/lib64/lv2/calf.lv2/Reverb.ttl
-/usr/lib64/lv2/calf.lv2/ReverseDelay.ttl
-/usr/lib64/lv2/calf.lv2/RingModulator.ttl
-/usr/lib64/lv2/calf.lv2/RotarySpeaker.ttl
-/usr/lib64/lv2/calf.lv2/Saturator.ttl
-/usr/lib64/lv2/calf.lv2/SidechainCompressor.ttl
-/usr/lib64/lv2/calf.lv2/SidechainGate.ttl
-/usr/lib64/lv2/calf.lv2/SidechainLimiter.ttl
-/usr/lib64/lv2/calf.lv2/StereoTools.ttl
-/usr/lib64/lv2/calf.lv2/TapeSimulator.ttl
-/usr/lib64/lv2/calf.lv2/TransientDesigner.ttl
-/usr/lib64/lv2/calf.lv2/VintageDelay.ttl
-/usr/lib64/lv2/calf.lv2/Vinyl.ttl
-/usr/lib64/lv2/calf.lv2/Vocoder.ttl
-/usr/lib64/lv2/calf.lv2/Wavetable.ttl
-/usr/lib64/lv2/calf.lv2/XOver2Band.ttl
-/usr/lib64/lv2/calf.lv2/XOver3Band.ttl
-/usr/lib64/lv2/calf.lv2/XOver4Band.ttl
-/usr/lib64/lv2/calf.lv2/calf.so
-/usr/lib64/lv2/calf.lv2/manifest.ttl
-/usr/lib64/lv2/calf.lv2/presets-Filter.ttl
-/usr/lib64/lv2/calf.lv2/presets-Flanger.ttl
-/usr/lib64/lv2/calf.lv2/presets-MonoCompressor.ttl
-/usr/lib64/lv2/calf.lv2/presets-Monosynth.ttl
-/usr/lib64/lv2/calf.lv2/presets-Organ.ttl
-/usr/lib64/lv2/calf.lv2/presets-Reverb.ttl
-/usr/lib64/lv2/calf.lv2/presets-Wavetable.ttl
-
-%files doc
-%defattr(0644,root,root,0755)
-%doc /usr/share/doc/calf/*
-
-%files man
-%defattr(0644,root,root,0755)
-/usr/share/man/man1/calfjackhost.1
-/usr/share/man/man7/calf.7
-
-%files staticdev
-%defattr(-,root,root,-)
-/usr/lib64/calf/libcalf.a
-/usr/lib64/calf/libcalflv2gui.a

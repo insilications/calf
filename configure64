@@ -1,6 +1,8 @@
---enable-shared
---enable-static
+--enable-shared=yes
+--enable-static=yes
 --enable-experimental=yes
+--disable-debug
+--enable-sse
 --with-lv2
 --enable-ladspa
 --with-ladspa-dir=/usr/lib64/ladspa

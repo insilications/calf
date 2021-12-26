@@ -13,4 +13,3 @@ Configure miss: whether a statically linked program can dlopen itself
 Configure miss: whether to compile with SSE
 Configure miss: whether to enable debugging mode
 Configure miss: whether to enable debugging mode
-Configure miss: whether to enable experimental/unfinished features

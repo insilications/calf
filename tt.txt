@@ -1,0 +1,1316 @@
+
+libsndfile_la-sndfile.o:
+         U aiff_open
+         U au_open
+         U avr_open
+         U broadcast_var_get
+         U broadcast_var_set
+         U caf_open
+         U cart_var_get
+         U cart_var_set
+         U close
+         U __ctype_tolower_loc
+         U dither_init
+         U double64_init
+         U dwd_open
+         U flac_open
+         U float32_init
+         U htk_open
+         U id3_skip
+         U ircam_open
+         U mat4_open
+         U mat5_open
+         U mpc2k_open
+         U mpeg_open
+         U nist_open
+         U ogg_open
+         U paf_open
+         U psf_allocate
+         U psf_binheader_readf
+         U psf_calc_max_all_channels
+         U psf_calc_signal_max
+         U psf_close_rsrc
+         U psf_copy_filename
+         U psf_cues_dup
+         U psf_default_seek
+         U psf_fclose
+         U psf_file_valid
+         U psf_fopen
+         U psf_fread
+         U psf_fseek
+         U psf_fsync
+         U psf_ftell
+         U psf_ftruncate
+         U psf_fwrite
+         U psf_get_chunk_iterator
+         U psf_get_cues
+         U psf_get_filelen
+         U psf_get_format_info
+         U psf_get_format_major
+         U psf_get_format_major_count
+         U psf_get_format_simple
+         U psf_get_format_simple_count
+         U psf_get_format_subtype
+         U psf_get_format_subtype_count
+         U psf_get_max_all_channels
+         U psf_get_signal_max
+         U psf_get_string
+         U psf_init_files
+         U psf_instrument_alloc
+         U psf_is_pipe
+         U psf_log_printf
+         U psf_log_SF_INFO
+         U psf_memset
+00000000 T psf_open_file
+         U psf_open_rsrc
+         U psf_rand_int32
+         U psf_set_file
+         U psf_set_stdio
+         U psf_set_string
+         U psf_strlcpy
+         U pvf_open
+         U raw_open
+         U rf64_open
+         U rx2_open
+         U sd2_open
+         U sds_open
+00000000 T sf_close
+00000000 T sf_command
+00000000 T sf_current_byterate
+00000000 B sf_errno
+00000000 T sf_error
+00000000 T sf_error_number
+00000000 T sf_error_str
+00000000 T sf_format_check
+00000000 T sf_get_chunk_data
+00000000 T sf_get_chunk_iterator
+00000000 T sf_get_chunk_size
+00000000 T sf_get_string
+00000000 T sf_next_chunk_iterator
+00000000 T sf_open
+00000000 T sf_open_fd
+00000000 T sf_open_virtual
+00000000 T sf_perror
+00000000 T sf_read_double
+00000000 T sf_readf_double
+00000000 T sf_readf_float
+00000000 T sf_readf_int
+00000000 T sf_read_float
+00000000 T sf_readf_short
+00000000 T sf_read_int
+00000000 T sf_read_raw
+00000000 T sf_read_short
+00000000 T sf_seek
+00000000 T sf_set_chunk
+00000000 T sf_set_string
+00000000 T sf_strerror
+00000000 T sf_version_string
+00000000 T sf_write_double
+00000000 T sf_writef_double
+00000000 T sf_writef_float
+00000000 T sf_writef_int
+00000000 T sf_write_float
+00000000 T sf_writef_short
+00000000 T sf_write_int
+00000000 T sf_write_raw
+00000000 T sf_write_short
+00000000 T sf_write_sync
+         U stderr
+         U svx_open
+         U txw_open
+         U voc_open
+         U w64_open
+         U wav_open
+         U wve_open
+         U xi_open
+
+libsndfile_la-aiff.o:
+         U aiff_caf_find_channel_layout_tag
+         U aiff_caf_of_channel_layout_tag
+         U aiff_ima_init
+00000000 T aiff_open
+         U alaw_init
+         U double64_init
+         U dwvw_init
+         U float32_init
+         U gsm610_init
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_cues_alloc
+         U psf_find_read_chunk_iterator
+         U psf_find_read_chunk_m32
+         U psf_fread
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_instrument_alloc
+         U psf_isprint
+         U psf_log_printf
+         U psf_next_chunk_iterator
+         U psf_sanitize_string
+         U psf_save_write_chunk
+         U psf_store_read_chunk_u32
+         U psf_store_string
+         U psf_strlcpy
+         U s_bitwidth_to_subformat
+         U time
+         U ulaw_init
+
+libsndfile_la-au.o:
+         U alaw_init
+00000000 T au_open
+         U double64_init
+         U float32_init
+         U g72x_init
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+         U ulaw_init
+
+libsndfile_la-avr.o:
+00000000 T avr_open
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+
+libsndfile_la-caf.o:
+         U aiff_caf_find_channel_layout_tag
+         U aiff_caf_of_channel_layout_tag
+         U alac_get_desc_chunk_items
+         U alac_init
+         U alaw_init
+00000000 T caf_open
+         U double64_be_read
+         U double64_be_write
+         U double64_init
+         U float32_init
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_find_read_chunk_iterator
+         U psf_fread
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_get_string
+         U psf_log_printf
+         U psf_next_chunk_iterator
+         U psf_save_write_chunk
+         U psf_store_read_chunk_u32
+         U psf_store_string
+         U ulaw_init
+
+libsndfile_la-dwd.o:
+00000000 T dwd_open
+
+libsndfile_la-flac.o:
+00000000 T flac_init
+         U FLAC__metadata_object_delete
+         U FLAC__metadata_object_new
+         U FLAC__metadata_object_vorbiscomment_append_comment
+         U FLAC__metadata_object_vorbiscomment_entry_from_name_value_pair
+         U FLAC__metadata_object_vorbiscomment_find_entry_from
+00000000 T flac_open
+         U FLAC__stream_decoder_delete
+         U FLAC__StreamDecoderErrorStatusString
+         U FLAC__stream_decoder_finish
+         U FLAC__stream_decoder_get_decode_position
+         U FLAC__stream_decoder_get_state
+         U FLAC__stream_decoder_init_stream
+         U FLAC__stream_decoder_new
+         U FLAC__stream_decoder_process_single
+         U FLAC__stream_decoder_process_until_end_of_metadata
+         U FLAC__stream_decoder_seek_absolute
+         U FLAC__stream_decoder_set_metadata_respond_all
+         U FLAC__StreamDecoderStateString
+         U FLAC__stream_encoder_delete
+         U FLAC__stream_encoder_finish
+         U FLAC__StreamEncoderInitStatusString
+         U FLAC__stream_encoder_init_stream
+         U FLAC__stream_encoder_new
+         U FLAC__stream_encoder_process_interleaved
+         U FLAC__stream_encoder_set_bits_per_sample
+         U FLAC__stream_encoder_set_channels
+         U FLAC__stream_encoder_set_compression_level
+         U FLAC__stream_encoder_set_metadata
+         U FLAC__stream_encoder_set_sample_rate
+         U psf_fread
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_log_printf
+         U psf_store_string
+
+libsndfile_la-g72x.o:
+         U g72x_decode_block
+         U g72x_encode_block
+00000000 T g72x_init
+         U g72x_reader_init
+         U g72x_writer_init
+         U psf_fread
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+
+libsndfile_la-htk.o:
+00000000 T htk_open
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+
+libsndfile_la-ircam.o:
+         U alaw_init
+         U float32_init
+00000000 T ircam_open
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_log_printf
+         U ulaw_init
+
+libsndfile_la-macos.o:
+00000000 T macos_guess_file_type
+         U psf_log_printf
+         U stat
+
+libsndfile_la-mat4.o:
+         U double64_init
+         U float32_init
+00000000 T mat4_open
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+
+libsndfile_la-mat5.o:
+         U double64_init
+         U float32_init
+00000000 T mat5_open
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_date_str
+         U psf_log_printf
+
+libsndfile_la-nist.o:
+         U alaw_init
+00000000 T nist_open
+         U pcm_init
+         U psf_asciiheader_printf
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+         U ulaw_init
+
+libsndfile_la-paf.o:
+00000000 T paf_open
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fread
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+
+libsndfile_la-pvf.o:
+         U pcm_init
+         U psf_binheader_readf
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_log_printf
+00000000 T pvf_open
+
+libsndfile_la-raw.o:
+         U alaw_init
+         U double64_init
+         U dwvw_init
+         U float32_init
+         U gsm610_init
+         U nms_adpcm_init
+         U pcm_init
+00000000 T raw_open
+         U ulaw_init
+         U vox_adpcm_init
+
+libsndfile_la-rx2.o:
+00000000 T rx2_open
+
+libsndfile_la-sd2.o:
+         U pcm_init
+         U psf_binheader_writef
+         U psf_close_rsrc
+         U psf_file_valid
+         U psf_fread
+         U psf_fseek
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_isprint
+         U psf_log_printf
+         U psf_open_rsrc
+         U psf_use_rsrc
+00000000 T sd2_open
+         U strtol
+
+libsndfile_la-sds.o:
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fread
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_log_printf
+00000000 T sds_open
+
+libsndfile_la-svx.o:
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_isprint
+         U psf_log_printf
+00000000 T svx_open
+
+libsndfile_la-txw.o:
+00000000 T txw_open
+
+libsndfile_la-voc.o:
+         U alaw_init
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+         U ulaw_init
+00000000 T voc_open
+
+libsndfile_la-wve.o:
+         U alaw_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+00000000 T wve_open
+
+libsndfile_la-w64.o:
+         U alaw_init
+         U double64_init
+         U float32_init
+         U gsm610_init
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+         U u_bitwidth_to_subformat
+         U ulaw_init
+00000000 T w64_open
+         U wavlike_ima_init
+         U wavlike_msadpcm_init
+         U wavlike_msadpcm_write_adapt_coeffs
+         U wavlike_read_fmt_chunk
+         U wavlike_srate2blocksize
+
+libsndfile_la-wavlike.o:
+         U append_snprintf
+         U audio_detect
+         U broadcast_var_alloc
+         U cart_var_alloc
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fread
+         U psf_fseek
+         U psf_location_string_count
+         U psf_log_printf
+         U psf_store_string
+         U time
+         U u_bitwidth_to_subformat
+00000000 T wavlike_analyze
+00000000 T wavlike_format_str
+00000000 T wavlike_gen_channel_mask
+00000000 T wavlike_read_bext_chunk
+00000000 T wavlike_read_cart_chunk
+00000000 T wavlike_read_fmt_chunk
+00000000 T wavlike_read_peak_chunk
+00000000 T wavlike_srate2blocksize
+00000000 T wavlike_subchunk_parse
+00000000 T wavlike_write_bext_chunk
+00000000 T wavlike_write_cart_chunk
+00000000 T wavlike_write_custom_chunks
+00000000 T wavlike_write_guid
+00000000 T wavlike_write_peak_chunk
+00000000 T wavlike_write_strings
+
+libsndfile_la-wav.o:
+         U alaw_init
+         U double64_init
+         U float32_init
+         U g72x_init
+         U gsm610_init
+         U mpeg_init
+         U nms_adpcm_init
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_cues_alloc
+         U psf_find_read_chunk_iterator
+         U psf_fread
+         U psf_fseek
+         U psf_ftell
+         U psf_ftruncate
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_instrument_alloc
+         U psf_isprint
+         U psf_log_printf
+         U psf_next_chunk_iterator
+         U psf_save_write_chunk
+         U psf_store_read_chunk_u32
+         U u_bitwidth_to_subformat
+         U ulaw_init
+         U wavlike_analyze
+         U wavlike_gen_channel_mask
+         U wavlike_ima_init
+         U wavlike_msadpcm_init
+         U wavlike_msadpcm_write_adapt_coeffs
+         U wavlike_read_bext_chunk
+         U wavlike_read_cart_chunk
+         U wavlike_read_fmt_chunk
+         U wavlike_read_peak_chunk
+         U wavlike_srate2blocksize
+         U wavlike_subchunk_parse
+         U wavlike_write_bext_chunk
+         U wavlike_write_cart_chunk
+         U wavlike_write_custom_chunks
+         U wavlike_write_guid
+         U wavlike_write_peak_chunk
+         U wavlike_write_strings
+00000000 T wav_open
+
+libsndfile_la-xi.o:
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fread
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_instrument_alloc
+         U psf_log_printf
+         U psf_store_string
+00000000 T xi_open
+
+libsndfile_la-mpc2k.o:
+00000000 T mpc2k_open
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+
+libsndfile_la-rf64.o:
+         U alaw_init
+         U __ctype_b_loc
+         U double64_init
+         U float32_init
+         U pcm_init
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_find_read_chunk_iterator
+         U psf_fread
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+         U psf_next_chunk_iterator
+         U psf_save_write_chunk
+         U psf_store_read_chunk_u32
+00000000 T rf64_open
+         U u_bitwidth_to_subformat
+         U ulaw_init
+         U wavlike_analyze
+         U wavlike_gen_channel_mask
+         U wavlike_read_bext_chunk
+         U wavlike_read_cart_chunk
+         U wavlike_read_fmt_chunk
+         U wavlike_read_peak_chunk
+         U wavlike_subchunk_parse
+         U wavlike_write_bext_chunk
+         U wavlike_write_cart_chunk
+         U wavlike_write_custom_chunks
+         U wavlike_write_guid
+         U wavlike_write_peak_chunk
+         U wavlike_write_strings
+
+libsndfile_la-ogg.o:
+         U __ctype_b_loc
+         U flac_open
+00000000 T ogg_open
+         U ogg_opus_open
+         U ogg_page_bos
+         U ogg_page_eos
+         U ogg_page_granulepos
+         U ogg_page_packets
+         U ogg_page_serialno
+00000000 T ogg_read_first_page
+         U ogg_stream_clear
+         U ogg_stream_init
+00000000 T ogg_stream_next_page
+         U ogg_stream_packetout
+         U ogg_stream_packetpeek
+         U ogg_stream_pagein
+         U ogg_stream_reset
+         U ogg_stream_reset_serialno
+00000000 T ogg_stream_seek_page_search
+00000000 T ogg_stream_unpack_page
+         U ogg_sync_buffer
+         U ogg_sync_clear
+00000000 T ogg_sync_fseek
+00000000 T ogg_sync_ftell
+         U ogg_sync_init
+00000000 T ogg_sync_last_page_before
+00000000 T ogg_sync_next_page
+         U ogg_sync_pageseek
+         U ogg_sync_reset
+         U ogg_sync_wrote
+         U ogg_vorbis_open
+00000000 T ogg_write_page
+         U psf_fread
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_log_printf
+
+libsndfile_la-ogg_vorbis.o:
+         U ogg_page_eos
+         U ogg_stream_flush
+         U ogg_stream_init
+         U ogg_stream_next_page
+         U ogg_stream_packetin
+         U ogg_stream_packetout
+         U ogg_stream_packetpeek
+         U ogg_stream_pageout
+         U ogg_stream_reset_serialno
+         U ogg_stream_seek_page_search
+         U ogg_stream_unpack_page
+         U ogg_sync_fseek
+         U ogg_sync_ftell
+         U ogg_sync_last_page_before
+00000000 T ogg_vorbis_open
+         U ogg_write_page
+         U psf_log_printf
+         U psf_rand_int32
+         U psf_store_string
+         U vorbis_analysis
+         U vorbis_analysis_blockout
+         U vorbis_analysis_buffer
+         U vorbis_analysis_headerout
+         U vorbis_analysis_init
+         U vorbis_analysis_wrote
+         U vorbis_bitrate_addblock
+         U vorbis_bitrate_flushpacket
+         U vorbis_block_clear
+         U vorbis_block_init
+         U vorbis_comment_add_tag
+         U vorbis_comment_clear
+         U vorbis_comment_init
+         U vorbis_comment_query
+         U vorbis_dsp_clear
+         U vorbis_encode_init_vbr
+         U vorbis_info_blocksize
+         U vorbis_info_clear
+         U vorbis_info_init
+         U vorbis_packet_blocksize
+         U vorbis_synthesis
+         U vorbis_synthesis_blockin
+         U vorbis_synthesis_headerin
+         U vorbis_synthesis_init
+         U vorbis_synthesis_pcmout
+         U vorbis_synthesis_read
+         U vorbis_synthesis_restart
+         U vorbis_synthesis_trackonly
+         U vorbis_version_string
+
+libsndfile_la-ogg_speex.o:
+00000000 T ogg_speex_open
+         U psf_log_printf
+
+libsndfile_la-ogg_pcm.o:
+00000000 T ogg_pcm_open
+         U psf_log_printf
+
+libsndfile_la-ogg_opus.o:
+00000000 T ogg_opus_open
+         U ogg_packet_clear
+         U ogg_page_bos
+         U ogg_page_eos
+         U ogg_page_packets
+         U ogg_page_serialno
+         U ogg_stream_flush
+         U ogg_stream_flush_fill
+         U ogg_stream_init
+         U ogg_stream_next_page
+         U ogg_stream_packetin
+         U ogg_stream_packetout
+         U ogg_stream_pageout
+         U ogg_stream_pageout_fill
+         U ogg_stream_reset
+         U ogg_stream_reset_serialno
+         U ogg_stream_seek_page_search
+         U ogg_stream_unpack_page
+         U ogg_sync_fseek
+         U ogg_sync_ftell
+         U ogg_sync_last_page_before
+         U ogg_write_page
+         U opus_get_version_string
+         U opus_multistream_decode_float
+         U opus_multistream_decoder_create
+         U opus_multistream_decoder_ctl
+         U opus_multistream_decoder_destroy
+         U opus_multistream_encode_float
+         U opus_multistream_encoder_create
+         U opus_multistream_encoder_ctl
+         U opus_multistream_encoder_destroy
+         U opus_multistream_surround_encoder_create
+         U opus_packet_get_nb_samples
+         U opus_strerror
+         U psf_binheader_readf
+         U psf_binheader_writef
+         U psf_fseek
+         U psf_is_pipe
+         U psf_log_printf
+         U psf_rand_int32
+         U vorbiscomment_read_tags
+         U vorbiscomment_write_tags
+
+libsndfile_la-ogg_vcomment.o:
+         U __ctype_toupper_loc
+         U psf_binheader_writef
+         U psf_log_printf
+         U psf_store_string
+00000000 T vorbiscomment_read_tags
+00000000 T vorbiscomment_write_tags
+
+libsndfile_la-mpeg.o:
+00000000 T mpeg_init
+00000000 T mpeg_open
+         U psf_log_printf
+
+add.o:
+         U __assert_fail
+00000000 T gsm_abs
+00000000 T gsm_add
+00000000 T gsm_asl
+00000000 T gsm_asr
+00000000 T gsm_div
+00000000 T gsm_L_add
+00000000 T gsm_L_asl
+00000000 T gsm_L_asr
+00000000 T gsm_L_mult
+00000000 T gsm_L_sub
+00000000 T gsm_mult
+00000000 T gsm_mult_r
+00000000 T gsm_norm
+00000000 T gsm_sub
+
+code.o:
+00000000 T Gsm_Coder
+         U Gsm_Long_Term_Predictor
+         U Gsm_LPC_Analysis
+         U Gsm_Preprocess
+         U Gsm_RPE_Encoding
+         U Gsm_Short_Term_Analysis_Filter
+
+decode.o:
+00000000 T Gsm_Decoder
+         U Gsm_Long_Term_Synthesis_Filtering
+         U Gsm_RPE_Decoding
+         U Gsm_Short_Term_Synthesis_Filter
+
+gsm_create.o:
+00000000 T gsm_create
+00000000 T gsm_init
+
+gsm_decode.o:
+00000000 T gsm_decode
+         U Gsm_Decoder
+
+gsm_destroy.o:
+00000000 T gsm_destroy
+
+gsm_encode.o:
+         U Gsm_Coder
+00000000 T gsm_encode
+
+gsm_option.o:
+00000000 T gsm_option
+
+long_term.o:
+         U __assert_fail
+         U gsm_DLB
+00000000 T Gsm_Long_Term_Predictor
+00000000 T Gsm_Long_Term_Synthesis_Filtering
+         U gsm_mult
+         U gsm_norm
+         U gsm_QLB
+
+lpc.o:
+         U __assert_fail
+         U gsm_div
+00000000 T Gsm_LPC_Analysis
+         U gsm_norm
+
+preprocess.o:
+         U __assert_fail
+00000000 T Gsm_Preprocess
+
+rpe.o:
+         U __assert_fail
+         U gsm_add
+         U gsm_asl
+         U gsm_asr
+         U gsm_FAC
+         U gsm_NRFAC
+00000000 T Gsm_RPE_Decoding
+00000000 T Gsm_RPE_Encoding
+         U gsm_sub
+
+short_term.o:
+00000000 T Gsm_Short_Term_Analysis_Filter
+00000000 T Gsm_Short_Term_Synthesis_Filter
+
+table.o:
+00000000 D gsm_A
+00000000 D gsm_B
+00000000 D gsm_DLB
+00000000 D gsm_FAC
+00000000 D gsm_H
+00000000 D gsm_INVA
+00000000 D gsm_MAC
+00000000 D gsm_MIC
+00000000 D gsm_NRFAC
+00000000 D gsm_QLB
+
+g721.o:
+00000000 T g721_decoder
+00000000 T g721_encoder
+         U predictor_pole
+         U predictor_zero
+         U quantize
+         U reconstruct
+         U step_size
+         U update
+
+g723_16.o:
+00000000 T g723_16_decoder
+00000000 T g723_16_encoder
+         U predictor_pole
+         U predictor_zero
+         U quantize
+         U reconstruct
+         U step_size
+         U update
+
+g723_24.o:
+00000000 T g723_24_decoder
+00000000 T g723_24_encoder
+         U predictor_pole
+         U predictor_zero
+         U quantize
+         U reconstruct
+         U step_size
+         U update
+
+g723_40.o:
+00000000 T g723_40_decoder
+00000000 T g723_40_encoder
+         U predictor_pole
+         U predictor_zero
+         U quantize
+         U reconstruct
+         U step_size
+         U update
+
+g72x.o:
+         U g721_decoder
+         U g721_encoder
+         U g723_16_decoder
+         U g723_16_encoder
+         U g723_24_decoder
+         U g723_24_encoder
+         U g723_40_decoder
+         U g723_40_encoder
+00000000 T g72x_decode_block
+00000000 T g72x_encode_block
+00000000 T g72x_reader_init
+00000000 T g72x_writer_init
+00000000 T predictor_pole
+00000000 T predictor_zero
+00000000 T private_init_state
+00000000 T quantize
+00000000 T reconstruct
+00000000 T step_size
+00000000 T update
+
+ALACBitUtilities.o:
+00000000 T BitBufferAdvance
+00000000 T BitBufferByteAlign
+00000000 T BitBufferGetPosition
+00000000 T BitBufferInit
+00000000 T BitBufferPeek
+00000000 T BitBufferPeekOne
+00000000 T BitBufferRead
+00000000 T BitBufferReadOne
+00000000 T BitBufferReadSmall
+00000000 T BitBufferReset
+00000000 T BitBufferRewind
+00000000 T BitBufferUnpackBERSize
+00000000 T BitBufferWrite
+
+ag_dec.o:
+         U BitBufferAdvance
+00000000 T dyn_decomp
+00000000 T set_ag_params
+00000000 T set_standard_ag_params
+
+ag_enc.o:
+         U BitBufferAdvance
+00000000 T dyn_comp
+
+alac_decoder.o:
+00000000 T alac_decode
+00000000 T alac_decoder_init
+         U BitBufferAdvance
+         U BitBufferByteAlign
+         U BitBufferRead
+         U BitBufferReadOne
+         U BitBufferReadSmall
+         U copyPredictorTo20
+         U copyPredictorTo24
+         U copyPredictorTo24Shift
+         U copyPredictorTo32
+         U copyPredictorTo32Shift
+         U dyn_decomp
+00000000 D kMaxBitDepth
+         U set_ag_params
+         U unmix16
+         U unmix20
+         U unmix24
+         U unmix32
+         U unpc_block
+
+alac_encoder.o:
+00000000 T alac_encode
+00000000 T alac_encoder_init
+00000000 T alac_get_magic_cookie
+00000000 T alac_get_magic_cookie_size
+00000000 T alac_get_source_format
+00000000 T alac_set_fastmode
+         U BitBufferByteAlign
+         U BitBufferGetPosition
+         U BitBufferInit
+         U BitBufferWrite
+         U dyn_comp
+         U init_coefs
+00000000 D kALACEncoderMagic
+00000000 D kDefaultMixBits
+00000000 D kDefaultMixRes
+00000000 D kDefaultNumUV
+00000000 D kMaxRes
+00000000 D kMaxSampleSize
+00000000 D kMaxUV
+00000000 D kMinUV
+         U mix16
+         U mix20
+         U mix24
+         U mix32
+         U pc_block
+         U set_ag_params
+         U set_standard_ag_params
+
+dp_dec.o:
+00000000 T unpc_block
+
+dp_enc.o:
+00000000 T copy_coefs
+00000000 T init_coefs
+00000000 T pc_block
+
+matrix_dec.o:
+00000000 T copyPredictorTo20
+00000000 T copyPredictorTo24
+00000000 T copyPredictorTo24Shift
+00000000 T copyPredictorTo32
+00000000 T copyPredictorTo32Shift
+00000000 T unmix16
+00000000 T unmix20
+00000000 T unmix24
+00000000 T unmix32
+
+matrix_enc.o:
+00000000 T mix16
+00000000 T mix20
+00000000 T mix24
+00000000 T mix32
+
+libcommon_la-alac.o:
+         U alac_decode
+         U alac_decoder_init
+         U alac_encode
+         U alac_encoder_init
+00000000 T alac_get_desc_chunk_items
+         U alac_get_magic_cookie
+         U alac_get_magic_cookie_size
+00000000 T alac_init
+         U BitBufferInit
+         U __errno_location
+         U fclose
+         U fread
+         U fseek
+         U psf_d2i_array
+         U psf_d2i_clip_array
+         U psf_f2i_array
+         U psf_f2i_clip_array
+         U psf_fread
+         U psf_fseek
+         U psf_fwrite
+         U psf_get_chunk_iterator
+         U psf_log_printf
+         U psf_open_tmpfile
+         U psf_save_write_chunk
+         U remove
+         U strerror
+
+libcommon_la-alaw.o:
+00000000 T alaw_init
+         U psf_fread
+         U psf_fwrite
+
+libcommon_la-audio_detect.o:
+00000000 T audio_detect
+         U psf_log_printf
+
+libcommon_la-broadcast.o:
+00000000 T broadcast_var_alloc
+00000000 T broadcast_var_get
+00000000 T broadcast_var_set
+         U psf_strlcat
+         U psf_strlcpy
+         U psf_strlcpy_crlf
+
+libcommon_la-cart.o:
+00000000 T cart_var_alloc
+00000000 T cart_var_get
+00000000 T cart_var_set
+         U psf_strlcat
+         U psf_strlcpy_crlf
+
+libcommon_la-chanmap.o:
+00000000 T aiff_caf_find_channel_layout_tag
+00000000 T aiff_caf_of_channel_layout_tag
+
+libcommon_la-chunk.o:
+00000000 T psf_find_read_chunk_iterator
+00000000 T psf_find_read_chunk_m32
+00000000 T psf_find_read_chunk_str
+00000000 T psf_get_chunk_iterator
+         U psf_memdup
+00000000 T psf_next_chunk_iterator
+00000000 T psf_save_write_chunk
+00000000 T psf_store_read_chunk_str
+00000000 T psf_store_read_chunk_u32
+
+libcommon_la-command.o:
+00000000 T psf_calc_max_all_channels
+00000000 T psf_calc_signal_max
+00000000 T psf_get_format_info
+00000000 T psf_get_format_major
+00000000 T psf_get_format_major_count
+00000000 T psf_get_format_simple
+00000000 T psf_get_format_simple_count
+00000000 T psf_get_format_subtype
+00000000 T psf_get_format_subtype_count
+00000000 T psf_get_max_all_channels
+00000000 T psf_get_signal_max
+         U sf_command
+         U sf_read_double
+         U sf_seek
+
+libcommon_la-common.o:
+         U access
+00000000 T append_snprintf
+         U __ctype_b_loc
+         U double64_be_read
+         U double64_be_write
+         U double64_le_read
+         U double64_le_write
+         U float32_be_read
+         U float32_be_write
+         U float32_le_read
+         U float32_le_write
+         U fopen
+         U getenv
+         U gettimeofday
+         U gmtime_r
+00000000 T psf_allocate
+00000000 T psf_asciiheader_printf
+00000000 T psf_binheader_readf
+00000000 T psf_binheader_writef
+00000000 T psf_cues_alloc
+00000000 T psf_cues_dup
+00000000 T psf_d2i_array
+00000000 T psf_d2i_clip_array
+00000000 T psf_d2s_array
+00000000 T psf_d2s_clip_array
+00000000 T psf_decode_frame_count
+00000000 T psf_default_seek
+00000000 T psf_f2i_array
+00000000 T psf_f2i_clip_array
+00000000 T psf_f2s_array
+00000000 T psf_f2s_clip_array
+         U psf_fread
+         U psf_fseek
+         U psf_ftell
+00000000 T psf_get_cues
+00000000 T psf_get_date_str
+00000000 T psf_hexdump
+00000000 T psf_instrument_alloc
+         U psf_is_pipe
+00000000 T psf_isprint
+00000000 T psf_log_printf
+00000000 T psf_log_SF_INFO
+00000000 T psf_memdup
+00000000 T psf_memset
+00000000 T psf_open_tmpfile
+00000000 T psf_rand_int32
+00000000 T psf_sanitize_string
+00000000 T psf_strlcat
+00000000 T psf_strlcpy
+00000000 T psf_strlcpy_crlf
+00000000 T s_bitwidth_to_subformat
+00000000 T str_of_endianness
+00000000 T str_of_major_format
+00000000 T str_of_minor_format
+00000000 T str_of_open_mode
+00000000 T subformat_to_bytewidth
+         U time
+00000000 T u_bitwidth_to_subformat
+
+libcommon_la-dither.o:
+00000000 T dither_init
+
+libcommon_la-double64.o:
+00000000 T double64_be_read
+00000000 T double64_be_write
+00000000 T double64_init
+00000000 T double64_le_read
+00000000 T double64_le_write
+         U floor
+         U fmod
+         U frexp
+         U pow
+         U psf_fread
+         U psf_fwrite
+         U psf_log_printf
+
+libcommon_la-dwvw.o:
+00000000 T dwvw_init
+         U psf_decode_frame_count
+         U psf_fread
+         U psf_fseek
+         U psf_fwrite
+         U psf_log_printf
+
+libcommon_la-file_io.o:
+         U close
+         U __errno_location
+         U fstat
+         U fsync
+         U ftruncate
+         U lseek
+         U open
+00000000 T psf_close_rsrc
+00000000 T psf_copy_filename
+00000000 T psf_fclose
+00000000 T psf_fgets
+00000000 T psf_file_valid
+00000000 T psf_fopen
+00000000 T psf_fread
+00000000 T psf_fseek
+00000000 T psf_fsync
+00000000 T psf_ftell
+00000000 T psf_ftruncate
+00000000 T psf_fwrite
+00000000 T psf_get_filelen
+00000000 T psf_init_files
+00000000 T psf_is_pipe
+         U psf_log_printf
+00000000 T psf_open_rsrc
+00000000 T psf_set_file
+00000000 T psf_set_stdio
+00000000 T psf_use_rsrc
+         U read
+         U __read_chk
+         U strerror
+         U write
+
+libcommon_la-float32.o:
+00000000 T float32_be_read
+00000000 T float32_be_write
+00000000 T float32_init
+00000000 T float32_le_read
+00000000 T float32_le_write
+         U frexp
+         U pow
+         U psf_fread
+         U psf_fwrite
+         U psf_log_printf
+
+libcommon_la-gsm610.o:
+00000000 T gsm610_init
+         U gsm_create
+         U gsm_decode
+         U gsm_destroy
+         U gsm_encode
+         U gsm_init
+         U gsm_option
+         U psf_fread
+         U psf_fseek
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+
+libcommon_la-id3.o:
+         U __ctype_b_loc
+00000000 T id3_lookup_v1_genre
+00000000 T id3_process_v2_genre
+00000000 T id3_skip
+         U psf_binheader_readf
+         U psf_log_printf
+
+libcommon_la-ima_adpcm.o:
+00000000 T aiff_ima_init
+         U psf_fread
+         U psf_fseek
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+00000000 T wavlike_ima_init
+
+libcommon_la-ima_oki_adpcm.o:
+00000000 T adpcm_decode
+00000000 T adpcm_encode
+00000000 T ima_oki_adpcm_decode_block
+00000000 T ima_oki_adpcm_encode_block
+00000000 T ima_oki_adpcm_init
+
+libcommon_la-interleave.o:
+00000000 T interleave_init
+         U psf_fseek
+         U psf_log_printf
+
+libcommon_la-mpeg_decode.o:
+00000000 T mpeg_decoder_init
+         U psf_log_printf
+
+libcommon_la-mpeg_l3_encode.o:
+00000000 T mpeg_l3_encoder_init
+         U psf_log_printf
+
+libcommon_la-ms_adpcm.o:
+         U psf_binheader_writef
+         U psf_fread
+         U psf_fseek
+         U psf_fwrite
+         U psf_log_printf
+00000000 T wavlike_msadpcm_init
+00000000 T wavlike_msadpcm_write_adapt_coeffs
+
+libcommon_la-nms_adpcm.o:
+00000000 T nms_adpcm_init
+         U psf_fread
+         U psf_fseek
+         U psf_fwrite
+         U psf_get_filelen
+         U psf_log_printf
+
+libcommon_la-pcm.o:
+00000000 T pcm_init
+         U psf_fread
+         U psf_fwrite
+         U psf_log_printf
+
+libcommon_la-strings.o:
+00000000 T psf_get_string
+00000000 T psf_location_string_count
+         U psf_log_printf
+00000000 T psf_set_string
+00000000 T psf_store_string
+
+libcommon_la-ulaw.o:
+         U psf_fread
+         U psf_fwrite
+00000000 T ulaw_init
+
+libcommon_la-vox_adpcm.o:
+         U ima_oki_adpcm_decode_block
+         U ima_oki_adpcm_encode_block
+         U ima_oki_adpcm_init
+         U psf_fread
+         U psf_fseek
+         U psf_ftell
+         U psf_fwrite
+         U psf_log_printf
+00000000 T vox_adpcm_init
+
+libcommon_la-windows.o:

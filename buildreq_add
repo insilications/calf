@@ -12,6 +12,7 @@ appstream-glib
 appstream-glib-dev
 atk
 atk-dev
+krb5-dev
 atkmm-dev
 autogen
 autogen-dev

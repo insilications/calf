@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : calf
 Version  : 0.90.3
-Release  : 227
+Release  : 228
 URL      : file:///aot/build/clearlinux/packages/calf/calf-v0.90.3.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/calf/calf-v0.90.3.tar.gz
 Summary  : No detailed summary available
@@ -508,7 +508,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640516336
+export SOURCE_DATE_EPOCH=1640525469
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -605,7 +605,7 @@ sd -r 'git describe' 'git describe --abbrev=0' .
 --with-ladspa-dir=/usr/lib64/ladspa \
 --with-lv2-dir=/usr/lib64/lv2
 ## make_prepend content
-sd "\-lfluidsynth\b" -- "-Wl,--whole-archive,--allow-multiple-definition,/usr/lib64/libfluidsynth.a,/usr/lib64/libsndfile.a,/usr/lib64/libFLAC.a,/usr/lib64/libopus.a,/usr/lib64/libvorbis.a,/usr/lib64/libvorbisenc.a,/usr/lib64/libvorbisfile.a,/usr/lib64/libogg.a,-lgomp,-lasound,-lpipewire-0.3,-lgmodule-2.0,-lglib-2.0,-lpcre,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu Makefile)
+# sd "\-lfluidsynth\b" -- "-Wl,--whole-archive,--allow-multiple-definition,/usr/lib64/libfluidsynth.a,/usr/lib64/libsndfile.a,/usr/lib64/libFLAC.a,/usr/lib64/libopus.a,/usr/lib64/libvorbis.a,/usr/lib64/libvorbisenc.a,/usr/lib64/libvorbisfile.a,/usr/lib64/libogg.a,-lgomp,-lasound,-lpipewire-0.3,-lgmodule-2.0,-lglib-2.0,-lpcre,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu Makefile)
 sd "\-lexpat\b" -- "-Wl,--whole-archive,--allow-multiple-definition,/usr/lib64/libexpat.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu Makefile)
 sd "/usr/lib64/libexpat.so" -- "-Wl,--whole-archive,--allow-multiple-definition,/usr/lib64/libexpat.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu Makefile)
 ## make_prepend end
@@ -613,7 +613,7 @@ make  %{?_smp_mflags}    V=1 VERBOSE=1
 
 
 %install
-export SOURCE_DATE_EPOCH=1640516336
+export SOURCE_DATE_EPOCH=1640525469
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar

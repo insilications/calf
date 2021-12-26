@@ -27,6 +27,7 @@ buildreq-cmake
 buildreq-configure
 buildreq-distutils3
 buildreq-gnome
+buildreq-kde
 buildreq-meson
 buildreq-qmake
 bzip2-dev
@@ -66,7 +67,6 @@ flac-dev32
 flac-staticdev
 flac-staticdev32
 flex
-fluidsynth
 fluidsynth-dev
 fluidsynth-staticdev
 fmt
@@ -91,6 +91,7 @@ gcc-libs-math
 gcc-libstdc++32
 gcc-libubsan
 gcc-locale
+gcovr
 gdb-dev
 gdk-pixbuf
 gdk-pixbuf-dev

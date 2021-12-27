@@ -5,12 +5,14 @@
 %define keepstatic 1
 Name     : calf
 Version  : 0.90.3
-Release  : 234
+Release  : 235
 URL      : file:///aot/build/clearlinux/packages/calf/calf-v0.90.3.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/calf/calf-v0.90.3.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
+Requires: calf-data = %{version}-%{release}
+Requires: calf-man = %{version}-%{release}
 BuildRequires : PyYAML
 BuildRequires : Pygments
 BuildRequires : SDL2
@@ -450,6 +452,51 @@ distortion and mastering effects), instruments (SF2 player, organ
 simulator and a monophonic synthesizer) and tools (analyzer, mono/stereo
 tools, crossovers). Calf Studio Gear aims for a professional audience.
 
+%package data
+Summary: data components for the calf package.
+Group: Data
+
+%description data
+data components for the calf package.
+
+
+%package dev
+Summary: dev components for the calf package.
+Group: Development
+Requires: calf-data = %{version}-%{release}
+Provides: calf-devel = %{version}-%{release}
+Requires: calf = %{version}-%{release}
+
+%description dev
+dev components for the calf package.
+
+
+%package doc
+Summary: doc components for the calf package.
+Group: Documentation
+Requires: calf-man = %{version}-%{release}
+
+%description doc
+doc components for the calf package.
+
+
+%package man
+Summary: man components for the calf package.
+Group: Default
+
+%description man
+man components for the calf package.
+
+
+%package staticdev
+Summary: staticdev components for the calf package.
+Group: Default
+Requires: calf-dev = %{version}-%{release}
+
+%description staticdev
+staticdev components for the calf package.
+
+
 %prep
 %setup -q -n calf
 cd %{_builddir}/calf
@@ -461,28 +508,36 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640576305
+export SOURCE_DATE_EPOCH=1640576987
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-## altflags1 content
-## altflags1
+## altflags_pgo content
+## pgo generate
 unset ASFLAGS
-export CFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export ASMFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export PGO_GEN="-fprofile-generate=/var/tmp/pgo -fprofile-dir=/var/tmp/pgo -fprofile-abs-path -fprofile-update=atomic -fprofile-arcs -ftest-coverage -fprofile-partial-training -fprofile-correction -freorder-functions --coverage -lgcov"
+export CFLAGS_GENERATE="-Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_GEN"
+export ASMFLAGS_GENERATE="-Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_GEN"
+export FCFLAGS_GENERATE="-Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_GEN"
+export FFLAGS_GENERATE="-Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_GEN"
+export CXXFLAGS_GENERATE="-Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_GEN"
+export LDFLAGS_GENERATE="-Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_GEN"
+export LIBS_GENERATE="-lgcov"
+## pgo use
 ## -fno-tree-vectorize: disable -ftree-vectorize thus disable -ftree-loop-vectorize and -ftree-slp-vectorize -fopt-info-vec
 ## -Ofast -ffast-math
 ## -funroll-loops maybe dangerous
 ## -Wl,-z,max-page-size=0x1000
 ## -pthread -lpthread
 ## -Wl,-Bsymbolic-functions
-export CXXFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-#
-export FCFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export FFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-#
-export LDFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export PGO_USE="-Wmissing-profile -Wcoverage-mismatch -fprofile-use=/var/tmp/pgo -fprofile-dir=/var/tmp/pgo -fprofile-abs-path -fprofile-update=atomic -fprofile-partial-training -fprofile-correction -freorder-functions"
+export CFLAGS_USE="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_USE"
+export ASMFLAGS_USE="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_USE"
+export FCFLAGS_USE="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_USE"
+export FFLAGS_USE="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_USE"
+export CXXFLAGS_USE="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_USE"
+export LDFLAGS_USE="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_USE"
 #
 export AR=/usr/bin/gcc-ar
 export RANLIB=/usr/bin/gcc-ranlib
@@ -545,9 +600,18 @@ export QT_IM_MODULE="cedilla"
 export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
 export PLASMA_USE_QT_SCALING=1
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
-## altflags1 end
+## altflags_pgo end
 sd -r '\s--dirty\s' ' ' .
 sd -r 'git describe' 'git describe --abbrev=0' .
+if [ ! -f statuspgo ]; then
+echo PGO Phase 1
+export CFLAGS="${CFLAGS_GENERATE}"
+export CXXFLAGS="${CXXFLAGS_GENERATE}"
+export FFLAGS="${FFLAGS_GENERATE}"
+export FCFLAGS="${FCFLAGS_GENERATE}"
+export LDFLAGS="${LDFLAGS_GENERATE}"
+export ASMFLAGS="${ASMFLAGS_GENERATE}"
+export LIBS="${LIBS_GENERATE}"
 %autogen_simple  --enable-shared=yes \
 --enable-static=yes \
 --enable-experimental=yes \
@@ -566,31 +630,80 @@ sd '\-lfftw3' -- '-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/u
 ## make_prepend end
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 
+## profile_payload start
+unset LD_LIBRARY_PATH
+unset LIBRARY_PATH
+make -j1 check V=1 VERBOSE=1 || :
+pushd src/
+./calfbenchmark || :
+popd
+export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/gbm:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
+export LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/gbm:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
+## profile_payload end
+make clean || :
+echo USED > statuspgo
+fi
+if [ -f statuspgo ]; then
+echo PGO Phase 2
+export CFLAGS="${CFLAGS_USE}"
+export CXXFLAGS="${CXXFLAGS_USE}"
+export FFLAGS="${FFLAGS_USE}"
+export FCFLAGS="${FCFLAGS_USE}"
+export LDFLAGS="${LDFLAGS_USE}"
+export ASMFLAGS="${ASMFLAGS_USE}"
+export LIBS="${LIBS_USE}"
+%autogen_simple --enable-shared=yes \
+--enable-static=yes \
+--enable-experimental=yes \
+--disable-debug \
+--enable-sse \
+--with-lv2 \
+--enable-ladspa \
+--with-ladspa-dir=/usr/lib64/ladspa \
+--with-lv2-dir=/usr/lib64/lv2
+## make_prepend content
+sd "\-lfluidsynth\b" -- "-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libfluidsynth.a,/usr/lib64/libsndfile.a,/usr/lib64/libFLAC.a,/usr/lib64/libopus.a,/usr/lib64/libvorbis.a,/usr/lib64/libvorbisenc.a,/usr/lib64/libvorbisfile.a,/usr/lib64/libogg.a,-lgomp,-lasound,-lpipewire-0.3,-lgmodule-2.0,-lglib-2.0,-lpcre,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu Makefile)
+sd "\-lexpat\b" -- "-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libexpat.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu Makefile)
+sd "/usr/lib64/libexpat.so" -- "-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libexpat.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu Makefile)
+sd '/usr/lib64/libfftw3\.so' -- '-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libfftw3.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive' $(fd -uu Makefile)
+sd '\-lfftw3' -- '-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libfftw3.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive' $(fd -uu Makefile)
+## make_prepend end
+make  %{?_smp_mflags}    V=1 VERBOSE=1
+fi
+
 
 %install
-export SOURCE_DATE_EPOCH=1640576305
+export SOURCE_DATE_EPOCH=1640576987
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-## altflags1 content
-## altflags1
+## altflags_pgo content
+## pgo generate
 unset ASFLAGS
-export CFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export ASMFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export PGO_GEN="-fprofile-generate=/var/tmp/pgo -fprofile-dir=/var/tmp/pgo -fprofile-abs-path -fprofile-update=atomic -fprofile-arcs -ftest-coverage -fprofile-partial-training -fprofile-correction -freorder-functions --coverage -lgcov"
+export CFLAGS_GENERATE="-Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_GEN"
+export ASMFLAGS_GENERATE="-Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_GEN"
+export FCFLAGS_GENERATE="-Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_GEN"
+export FFLAGS_GENERATE="-Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_GEN"
+export CXXFLAGS_GENERATE="-Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_GEN"
+export LDFLAGS_GENERATE="-Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_GEN"
+export LIBS_GENERATE="-lgcov"
+## pgo use
 ## -fno-tree-vectorize: disable -ftree-vectorize thus disable -ftree-loop-vectorize and -ftree-slp-vectorize -fopt-info-vec
 ## -Ofast -ffast-math
 ## -funroll-loops maybe dangerous
 ## -Wl,-z,max-page-size=0x1000
 ## -pthread -lpthread
 ## -Wl,-Bsymbolic-functions
-export CXXFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-#
-export FCFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-export FFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
-#
-export LDFLAGS="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1"
+export PGO_USE="-Wmissing-profile -Wcoverage-mismatch -fprofile-use=/var/tmp/pgo -fprofile-dir=/var/tmp/pgo -fprofile-abs-path -fprofile-update=atomic -fprofile-partial-training -fprofile-correction -freorder-functions"
+export CFLAGS_USE="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_USE"
+export ASMFLAGS_USE="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_USE"
+export FCFLAGS_USE="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_USE"
+export FFLAGS_USE="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_USE"
+export CXXFLAGS_USE="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_USE"
+export LDFLAGS_USE="-ggdb3 -ggnu-pubnames -gz=zlib -Ofast --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -floop-block -fno-math-errno -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-slp-vectorize -ftree-vectorize -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=auto -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer -fexceptions -static-libstdc++ -static-libgcc $PGO_USE"
 #
 export AR=/usr/bin/gcc-ar
 export RANLIB=/usr/bin/gcc-ranlib
@@ -653,7 +766,14 @@ export QT_IM_MODULE="cedilla"
 export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
 export PLASMA_USE_QT_SCALING=1
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
-## altflags1 end
+## altflags_pgo end
+export CFLAGS="${CFLAGS_USE}"
+export CXXFLAGS="${CXXFLAGS_USE}"
+export FFLAGS="${FFLAGS_USE}"
+export FCFLAGS="${FCFLAGS_USE}"
+export LDFLAGS="${LDFLAGS_USE}"
+export ASMFLAGS="${ASMFLAGS_USE}"
+export LIBS="${LIBS_USE}"
 %make_install
 ## install_append content
 # ln -sf /usr/lib64/calf/libcalf.so %{buildroot}/usr/lib64/calf/calf.so
@@ -661,3 +781,741 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
 %files
 %defattr(-,root,root,-)
+
+%files data
+%defattr(-,root,root,-)
+/usr/share/applications/calf.desktop
+/usr/share/bash-completion/completions/calf
+/usr/share/calf/calf-gui.xml
+/usr/share/calf/gui-analyzer.xml
+/usr/share/calf/gui-bassenhancer.xml
+/usr/share/calf/gui-compdelay.xml
+/usr/share/calf/gui-compressor.xml
+/usr/share/calf/gui-crusher.xml
+/usr/share/calf/gui-deesser.xml
+/usr/share/calf/gui-emphasis.xml
+/usr/share/calf/gui-envelopefilter.xml
+/usr/share/calf/gui-eq12.xml
+/usr/share/calf/gui-eq30.xml
+/usr/share/calf/gui-eq5.xml
+/usr/share/calf/gui-eq8.xml
+/usr/share/calf/gui-exciter.xml
+/usr/share/calf/gui-filter.xml
+/usr/share/calf/gui-filterclavier.xml
+/usr/share/calf/gui-flanger.xml
+/usr/share/calf/gui-fluidsynth.xml
+/usr/share/calf/gui-gate.xml
+/usr/share/calf/gui-haasenhancer.xml
+/usr/share/calf/gui-limiter.xml
+/usr/share/calf/gui-mono.xml
+/usr/share/calf/gui-monocompressor.xml
+/usr/share/calf/gui-monosynth.xml
+/usr/share/calf/gui-multibandcompressor.xml
+/usr/share/calf/gui-multibandenhancer.xml
+/usr/share/calf/gui-multibandgate.xml
+/usr/share/calf/gui-multibandlimiter.xml
+/usr/share/calf/gui-multichorus.xml
+/usr/share/calf/gui-multispread.xml
+/usr/share/calf/gui-organ.xml
+/usr/share/calf/gui-phaser.xml
+/usr/share/calf/gui-pitch.xml
+/usr/share/calf/gui-psyclipper.xml
+/usr/share/calf/gui-pulsator.xml
+/usr/share/calf/gui-reverb.xml
+/usr/share/calf/gui-reversedelay.xml
+/usr/share/calf/gui-ringmodulator.xml
+/usr/share/calf/gui-rotaryspeaker.xml
+/usr/share/calf/gui-saturator.xml
+/usr/share/calf/gui-sidechaincompressor.xml
+/usr/share/calf/gui-sidechaingate.xml
+/usr/share/calf/gui-sidechainlimiter.xml
+/usr/share/calf/gui-stereo.xml
+/usr/share/calf/gui-tapesimulator.xml
+/usr/share/calf/gui-transientdesigner.xml
+/usr/share/calf/gui-vintagedelay.xml
+/usr/share/calf/gui-vinyl.xml
+/usr/share/calf/gui-vocoder.xml
+/usr/share/calf/gui-wavetable.xml
+/usr/share/calf/gui-xover2.xml
+/usr/share/calf/gui-xover3.xml
+/usr/share/calf/gui-xover4.xml
+/usr/share/calf/gui/analyzer.xml
+/usr/share/calf/gui/bassenhancer.xml
+/usr/share/calf/gui/compdelay.xml
+/usr/share/calf/gui/compressor.xml
+/usr/share/calf/gui/crusher.xml
+/usr/share/calf/gui/deesser.xml
+/usr/share/calf/gui/emphasis.xml
+/usr/share/calf/gui/envelopefilter.xml
+/usr/share/calf/gui/eq12.xml
+/usr/share/calf/gui/eq30.xml
+/usr/share/calf/gui/eq5.xml
+/usr/share/calf/gui/eq8.xml
+/usr/share/calf/gui/exciter.xml
+/usr/share/calf/gui/filter.xml
+/usr/share/calf/gui/filterclavier.xml
+/usr/share/calf/gui/flanger.xml
+/usr/share/calf/gui/fluidsynth.xml
+/usr/share/calf/gui/gate.xml
+/usr/share/calf/gui/haasenhancer.xml
+/usr/share/calf/gui/limiter.xml
+/usr/share/calf/gui/mono.xml
+/usr/share/calf/gui/monocompressor.xml
+/usr/share/calf/gui/monosynth.xml
+/usr/share/calf/gui/multibandcompressor.xml
+/usr/share/calf/gui/multibandenhancer.xml
+/usr/share/calf/gui/multibandgate.xml
+/usr/share/calf/gui/multibandlimiter.xml
+/usr/share/calf/gui/multichorus.xml
+/usr/share/calf/gui/multispread.xml
+/usr/share/calf/gui/organ.xml
+/usr/share/calf/gui/phaser.xml
+/usr/share/calf/gui/pitch.xml
+/usr/share/calf/gui/psyclipper.xml
+/usr/share/calf/gui/pulsator.xml
+/usr/share/calf/gui/reverb.xml
+/usr/share/calf/gui/reversedelay.xml
+/usr/share/calf/gui/ringmodulator.xml
+/usr/share/calf/gui/rotaryspeaker.xml
+/usr/share/calf/gui/saturator.xml
+/usr/share/calf/gui/sidechaincompressor.xml
+/usr/share/calf/gui/sidechaingate.xml
+/usr/share/calf/gui/sidechainlimiter.xml
+/usr/share/calf/gui/stereo.xml
+/usr/share/calf/gui/tapesimulator.xml
+/usr/share/calf/gui/transientdesigner.xml
+/usr/share/calf/gui/vintagedelay.xml
+/usr/share/calf/gui/vinyl.xml
+/usr/share/calf/gui/vocoder.xml
+/usr/share/calf/gui/wavetable.xml
+/usr/share/calf/gui/xover2.xml
+/usr/share/calf/gui/xover3.xml
+/usr/share/calf/gui/xover4.xml
+/usr/share/calf/icons/LV2/Allpass.svg
+/usr/share/calf/icons/LV2/Amplifier.svg
+/usr/share/calf/icons/LV2/Analyser.svg
+/usr/share/calf/icons/LV2/Bandpass.svg
+/usr/share/calf/icons/LV2/Chorus.svg
+/usr/share/calf/icons/LV2/Comb.svg
+/usr/share/calf/icons/LV2/Compressor.svg
+/usr/share/calf/icons/LV2/Constant.svg
+/usr/share/calf/icons/LV2/Converter.svg
+/usr/share/calf/icons/LV2/Delay.svg
+/usr/share/calf/icons/LV2/Distortion.svg
+/usr/share/calf/icons/LV2/Dynamics.svg
+/usr/share/calf/icons/LV2/EQ.svg
+/usr/share/calf/icons/LV2/Envelope.svg
+/usr/share/calf/icons/LV2/Expander.svg
+/usr/share/calf/icons/LV2/Filter.svg
+/usr/share/calf/icons/LV2/Flanger.svg
+/usr/share/calf/icons/LV2/Function.svg
+/usr/share/calf/icons/LV2/Gate.svg
+/usr/share/calf/icons/LV2/Generator.svg
+/usr/share/calf/icons/LV2/Highpass.svg
+/usr/share/calf/icons/LV2/Instrument.svg
+/usr/share/calf/icons/LV2/Limiter.svg
+/usr/share/calf/icons/LV2/Mixer.svg
+/usr/share/calf/icons/LV2/Modulator.svg
+/usr/share/calf/icons/LV2/MultiEQ.svg
+/usr/share/calf/icons/LV2/Oscillator.svg
+/usr/share/calf/icons/LV2/ParaEQ.svg
+/usr/share/calf/icons/LV2/Phaser.svg
+/usr/share/calf/icons/LV2/Pitch.svg
+/usr/share/calf/icons/LV2/Reverb.svg
+/usr/share/calf/icons/LV2/Simulator.svg
+/usr/share/calf/icons/LV2/Spatial.svg
+/usr/share/calf/icons/LV2/Spectral.svg
+/usr/share/calf/icons/LV2/Utility.svg
+/usr/share/calf/icons/LV2/Waveshaper.svg
+/usr/share/calf/presets.xml
+/usr/share/calf/sf2/Crackle.sf2
+/usr/share/calf/sf2/Crinkle.sf2
+/usr/share/calf/sf2/Hum.sf2
+/usr/share/calf/sf2/Motor.sf2
+/usr/share/calf/sf2/Noise.sf2
+/usr/share/calf/sf2/Rumble.sf2
+/usr/share/calf/sf2/Static.sf2
+/usr/share/calf/strips/bassenhancer.xml
+/usr/share/calf/strips/compdelay.xml
+/usr/share/calf/strips/compressor.xml
+/usr/share/calf/strips/crusher.xml
+/usr/share/calf/strips/deesser.xml
+/usr/share/calf/strips/emphasis.xml
+/usr/share/calf/strips/envelopefilter.xml
+/usr/share/calf/strips/eq12.xml
+/usr/share/calf/strips/eq30.xml
+/usr/share/calf/strips/eq5.xml
+/usr/share/calf/strips/eq8.xml
+/usr/share/calf/strips/exciter.xml
+/usr/share/calf/strips/filter.xml
+/usr/share/calf/strips/filterclavier.xml
+/usr/share/calf/strips/flanger.xml
+/usr/share/calf/strips/fluidsynth.xml
+/usr/share/calf/strips/gate.xml
+/usr/share/calf/strips/haasenhancer.xml
+/usr/share/calf/strips/limiter.xml
+/usr/share/calf/strips/mono.xml
+/usr/share/calf/strips/monocompressor.xml
+/usr/share/calf/strips/monosynth.xml
+/usr/share/calf/strips/multibandcompressor.xml
+/usr/share/calf/strips/multibandenhancer.xml
+/usr/share/calf/strips/multibandgate.xml
+/usr/share/calf/strips/multibandlimiter.xml
+/usr/share/calf/strips/multichorus.xml
+/usr/share/calf/strips/multispread.xml
+/usr/share/calf/strips/organ.xml
+/usr/share/calf/strips/phaser.xml
+/usr/share/calf/strips/psyclipper.xml
+/usr/share/calf/strips/pulsator.xml
+/usr/share/calf/strips/reverb.xml
+/usr/share/calf/strips/reversedelay.xml
+/usr/share/calf/strips/ringmodulator.xml
+/usr/share/calf/strips/rotaryspeaker.xml
+/usr/share/calf/strips/saturator.xml
+/usr/share/calf/strips/sidechaincompressor.xml
+/usr/share/calf/strips/sidechaingate.xml
+/usr/share/calf/strips/sidechainlimiter.xml
+/usr/share/calf/strips/stereo.xml
+/usr/share/calf/strips/tapesimulator.xml
+/usr/share/calf/strips/transientdesigner.xml
+/usr/share/calf/strips/vintagedelay.xml
+/usr/share/calf/strips/vinyl.xml
+/usr/share/calf/strips/vocoder.xml
+/usr/share/calf/strips/wavetable.xml
+/usr/share/calf/strips/xover2.xml
+/usr/share/calf/strips/xover3.xml
+/usr/share/calf/strips/xover4.xml
+/usr/share/calf/styles/Calf_0.0.19/background_menu.png
+/usr/share/calf/styles/Calf_0.0.19/background_plugin.png
+/usr/share/calf/styles/Calf_0.0.19/background_rack.png
+/usr/share/calf/styles/Calf_0.0.19/combo_arrow.png
+/usr/share/calf/styles/Calf_0.0.19/gtk.rc
+/usr/share/calf/styles/Calf_0.0.19/knob_1.png
+/usr/share/calf/styles/Calf_0.0.19/knob_2.png
+/usr/share/calf/styles/Calf_0.0.19/knob_3.png
+/usr/share/calf/styles/Calf_0.0.19/knob_4.png
+/usr/share/calf/styles/Calf_0.0.19/knob_5.png
+/usr/share/calf/styles/Calf_0.0.19/light_bottom.png
+/usr/share/calf/styles/Calf_0.0.19/light_top.png
+/usr/share/calf/styles/Calf_0.0.19/notebook_screw.png
+/usr/share/calf/styles/Calf_0.0.19/side_d_e.png
+/usr/share/calf/styles/Calf_0.0.19/side_d_ne.png
+/usr/share/calf/styles/Calf_0.0.19/side_d_nw.png
+/usr/share/calf/styles/Calf_0.0.19/side_d_se.png
+/usr/share/calf/styles/Calf_0.0.19/side_d_sw.png
+/usr/share/calf/styles/Calf_0.0.19/side_d_w.png
+/usr/share/calf/styles/Calf_0.0.19/side_e.png
+/usr/share/calf/styles/Calf_0.0.19/side_ne.png
+/usr/share/calf/styles/Calf_0.0.19/side_nw.png
+/usr/share/calf/styles/Calf_0.0.19/side_se.png
+/usr/share/calf/styles/Calf_0.0.19/side_sw.png
+/usr/share/calf/styles/Calf_0.0.19/side_w.png
+/usr/share/calf/styles/Calf_0.0.19/slider_1_horiz.png
+/usr/share/calf/styles/Calf_0.0.19/slider_1_vert.png
+/usr/share/calf/styles/Calf_0.0.19/slider_2_horiz.png
+/usr/share/calf/styles/Calf_0.0.19/slider_2_vert.png
+/usr/share/calf/styles/Calf_0.0.19/tap_active.png
+/usr/share/calf/styles/Calf_0.0.19/tap_inactive.png
+/usr/share/calf/styles/Calf_0.0.19/tap_prelight.png
+/usr/share/calf/styles/Calf_0.0.19/toggle_0.png
+/usr/share/calf/styles/Calf_0.0.19/toggle_1.png
+/usr/share/calf/styles/Calf_0.0.19/toggle_2.png
+/usr/share/calf/styles/Calf_0.0.19/tubeH1.png
+/usr/share/calf/styles/Calf_0.0.19/tubeH2.png
+/usr/share/calf/styles/Calf_0.0.19/tubeV1.png
+/usr/share/calf/styles/Calf_0.0.19/tubeV2.png
+/usr/share/calf/styles/Calf_Default/background_menu.png
+/usr/share/calf/styles/Calf_Default/background_plugin.png
+/usr/share/calf/styles/Calf_Default/background_rack.png
+/usr/share/calf/styles/Calf_Default/combo_arrow.png
+/usr/share/calf/styles/Calf_Default/gtk.rc
+/usr/share/calf/styles/Calf_Default/knob_1.png
+/usr/share/calf/styles/Calf_Default/knob_2.png
+/usr/share/calf/styles/Calf_Default/knob_3.png
+/usr/share/calf/styles/Calf_Default/knob_4.png
+/usr/share/calf/styles/Calf_Default/knob_5.png
+/usr/share/calf/styles/Calf_Default/light_bottom.png
+/usr/share/calf/styles/Calf_Default/light_top.png
+/usr/share/calf/styles/Calf_Default/notebook_screw.png
+/usr/share/calf/styles/Calf_Default/side_d_e.png
+/usr/share/calf/styles/Calf_Default/side_d_ne.png
+/usr/share/calf/styles/Calf_Default/side_d_nw.png
+/usr/share/calf/styles/Calf_Default/side_d_se.png
+/usr/share/calf/styles/Calf_Default/side_d_sw.png
+/usr/share/calf/styles/Calf_Default/side_d_w.png
+/usr/share/calf/styles/Calf_Default/side_e.png
+/usr/share/calf/styles/Calf_Default/side_ne.png
+/usr/share/calf/styles/Calf_Default/side_nw.png
+/usr/share/calf/styles/Calf_Default/side_se.png
+/usr/share/calf/styles/Calf_Default/side_sw.png
+/usr/share/calf/styles/Calf_Default/side_w.png
+/usr/share/calf/styles/Calf_Default/slider_1_horiz.png
+/usr/share/calf/styles/Calf_Default/slider_1_vert.png
+/usr/share/calf/styles/Calf_Default/slider_2_horiz.png
+/usr/share/calf/styles/Calf_Default/slider_2_vert.png
+/usr/share/calf/styles/Calf_Default/tap_active.png
+/usr/share/calf/styles/Calf_Default/tap_inactive.png
+/usr/share/calf/styles/Calf_Default/tap_prelight.png
+/usr/share/calf/styles/Calf_Default/toggle_0.png
+/usr/share/calf/styles/Calf_Default/toggle_1.png
+/usr/share/calf/styles/Calf_Default/toggle_2.png
+/usr/share/calf/styles/Calf_Default/toggle_2_block.png
+/usr/share/calf/styles/Calf_Default/toggle_2_bypass.png
+/usr/share/calf/styles/Calf_Default/toggle_2_bypass2.png
+/usr/share/calf/styles/Calf_Default/toggle_2_connect.png
+/usr/share/calf/styles/Calf_Default/toggle_2_fast.png
+/usr/share/calf/styles/Calf_Default/toggle_2_gui.png
+/usr/share/calf/styles/Calf_Default/toggle_2_listen.png
+/usr/share/calf/styles/Calf_Default/toggle_2_logarithmic.png
+/usr/share/calf/styles/Calf_Default/toggle_2_magnetical.png
+/usr/share/calf/styles/Calf_Default/toggle_2_mono.png
+/usr/share/calf/styles/Calf_Default/toggle_2_muffle.png
+/usr/share/calf/styles/Calf_Default/toggle_2_mute.png
+/usr/share/calf/styles/Calf_Default/toggle_2_pauseplay.png
+/usr/share/calf/styles/Calf_Default/toggle_2_phase.png
+/usr/share/calf/styles/Calf_Default/toggle_2_sc_comp.png
+/usr/share/calf/styles/Calf_Default/toggle_2_sc_filter.png
+/usr/share/calf/styles/Calf_Default/toggle_2_softclip.png
+/usr/share/calf/styles/Calf_Default/toggle_2_solo.png
+/usr/share/calf/styles/Calf_Default/toggle_2_sync.png
+/usr/share/calf/styles/Calf_Default/toggle_2_void.png
+/usr/share/calf/styles/Calf_Default/tubeH1.png
+/usr/share/calf/styles/Calf_Default/tubeH2.png
+/usr/share/calf/styles/Calf_Default/tubeV1.png
+/usr/share/calf/styles/Calf_Default/tubeV2.png
+/usr/share/calf/styles/Calf_Flat_Default/background_menu.png
+/usr/share/calf/styles/Calf_Flat_Default/background_plugin.png
+/usr/share/calf/styles/Calf_Flat_Default/background_rack.png
+/usr/share/calf/styles/Calf_Flat_Default/combo_arrow.png
+/usr/share/calf/styles/Calf_Flat_Default/gtk.rc
+/usr/share/calf/styles/Calf_Flat_Default/knob_1.png
+/usr/share/calf/styles/Calf_Flat_Default/knob_2.png
+/usr/share/calf/styles/Calf_Flat_Default/knob_3.png
+/usr/share/calf/styles/Calf_Flat_Default/knob_4.png
+/usr/share/calf/styles/Calf_Flat_Default/knob_5.png
+/usr/share/calf/styles/Calf_Flat_Default/light_bottom.png
+/usr/share/calf/styles/Calf_Flat_Default/light_top.png
+/usr/share/calf/styles/Calf_Flat_Default/notebook_screw.png
+/usr/share/calf/styles/Calf_Flat_Default/side_d_e.png
+/usr/share/calf/styles/Calf_Flat_Default/side_d_ne.png
+/usr/share/calf/styles/Calf_Flat_Default/side_d_nw.png
+/usr/share/calf/styles/Calf_Flat_Default/side_d_se.png
+/usr/share/calf/styles/Calf_Flat_Default/side_d_sw.png
+/usr/share/calf/styles/Calf_Flat_Default/side_d_w.png
+/usr/share/calf/styles/Calf_Flat_Default/side_e.png
+/usr/share/calf/styles/Calf_Flat_Default/side_ne.png
+/usr/share/calf/styles/Calf_Flat_Default/side_nw.png
+/usr/share/calf/styles/Calf_Flat_Default/side_se.png
+/usr/share/calf/styles/Calf_Flat_Default/side_sw.png
+/usr/share/calf/styles/Calf_Flat_Default/side_w.png
+/usr/share/calf/styles/Calf_Flat_Default/slider_1_horiz.png
+/usr/share/calf/styles/Calf_Flat_Default/slider_1_vert.png
+/usr/share/calf/styles/Calf_Flat_Default/slider_2_horiz.png
+/usr/share/calf/styles/Calf_Flat_Default/slider_2_vert.png
+/usr/share/calf/styles/Calf_Flat_Default/tap_active.png
+/usr/share/calf/styles/Calf_Flat_Default/tap_inactive.png
+/usr/share/calf/styles/Calf_Flat_Default/tap_prelight.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_0.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_1.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_block.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_bypass.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_bypass2.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_connect.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_fast.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_gui.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_listen.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_logarithmic.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_magnetical.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_mono.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_muffle.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_mute.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_pauseplay.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_phase.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_sc_comp.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_sc_filter.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_softclip.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_solo.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_sync.png
+/usr/share/calf/styles/Calf_Flat_Default/toggle_2_void.png
+/usr/share/calf/styles/Calf_Flat_Default/tubeH1.png
+/usr/share/calf/styles/Calf_Flat_Default/tubeH2.png
+/usr/share/calf/styles/Calf_Flat_Default/tubeV1.png
+/usr/share/calf/styles/Calf_Flat_Default/tubeV2.png
+/usr/share/calf/styles/Calf_Hybreed/background_menu.png
+/usr/share/calf/styles/Calf_Hybreed/background_plugin.png
+/usr/share/calf/styles/Calf_Hybreed/combo_arrow.png
+/usr/share/calf/styles/Calf_Hybreed/gtk.rc
+/usr/share/calf/styles/Calf_Hybreed/knob_1.png
+/usr/share/calf/styles/Calf_Hybreed/knob_2.png
+/usr/share/calf/styles/Calf_Hybreed/knob_3.png
+/usr/share/calf/styles/Calf_Hybreed/knob_4.png
+/usr/share/calf/styles/Calf_Hybreed/knob_5.png
+/usr/share/calf/styles/Calf_Hybreed/notebook_screw.png
+/usr/share/calf/styles/Calf_Hybreed/side_d_e.png
+/usr/share/calf/styles/Calf_Hybreed/side_d_ne.png
+/usr/share/calf/styles/Calf_Hybreed/side_d_nw.png
+/usr/share/calf/styles/Calf_Hybreed/side_d_se.png
+/usr/share/calf/styles/Calf_Hybreed/side_d_sw.png
+/usr/share/calf/styles/Calf_Hybreed/side_d_w.png
+/usr/share/calf/styles/Calf_Hybreed/side_e.png
+/usr/share/calf/styles/Calf_Hybreed/side_ne.png
+/usr/share/calf/styles/Calf_Hybreed/side_nw.png
+/usr/share/calf/styles/Calf_Hybreed/side_se.png
+/usr/share/calf/styles/Calf_Hybreed/side_sw.png
+/usr/share/calf/styles/Calf_Hybreed/side_w.png
+/usr/share/calf/styles/Calf_Hybreed/slider_1_horiz.png
+/usr/share/calf/styles/Calf_Hybreed/slider_1_vert.png
+/usr/share/calf/styles/Calf_Hybreed/slider_2_horiz.png
+/usr/share/calf/styles/Calf_Hybreed/slider_2_vert.png
+/usr/share/calf/styles/Calf_Hybreed/tap_active.png
+/usr/share/calf/styles/Calf_Hybreed/tap_inactive.png
+/usr/share/calf/styles/Calf_Hybreed/tap_prelight.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_0.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_1.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_block.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_bypass.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_bypass2.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_fast.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_listen.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_logarithmic.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_magnetical.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_mono.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_muffle.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_mute.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_pauseplay.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_phase.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_sc_comp.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_sc_filter.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_softclip.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_solo.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_sync.png
+/usr/share/calf/styles/Calf_Hybreed/toggle_2_void.png
+/usr/share/calf/styles/Calf_Hybreed/tubeH1.png
+/usr/share/calf/styles/Calf_Hybreed/tubeH2.png
+/usr/share/calf/styles/Calf_Hybreed/tubeV1.png
+/usr/share/calf/styles/Calf_Hybreed/tubeV2.png
+/usr/share/calf/styles/Calf_Lost_Wages/background_menu.png
+/usr/share/calf/styles/Calf_Lost_Wages/background_plugin.png
+/usr/share/calf/styles/Calf_Lost_Wages/combo_arrow.png
+/usr/share/calf/styles/Calf_Lost_Wages/gtk.rc
+/usr/share/calf/styles/Calf_Lost_Wages/knob_1.png
+/usr/share/calf/styles/Calf_Lost_Wages/knob_2.png
+/usr/share/calf/styles/Calf_Lost_Wages/knob_3.png
+/usr/share/calf/styles/Calf_Lost_Wages/knob_4.png
+/usr/share/calf/styles/Calf_Lost_Wages/knob_5.png
+/usr/share/calf/styles/Calf_Lost_Wages/light_bottom.png
+/usr/share/calf/styles/Calf_Lost_Wages/light_top.png
+/usr/share/calf/styles/Calf_Lost_Wages/notebook_screw.png
+/usr/share/calf/styles/Calf_Lost_Wages/side_d_e.png
+/usr/share/calf/styles/Calf_Lost_Wages/side_d_ne.png
+/usr/share/calf/styles/Calf_Lost_Wages/side_d_nw.png
+/usr/share/calf/styles/Calf_Lost_Wages/side_d_se.png
+/usr/share/calf/styles/Calf_Lost_Wages/side_d_sw.png
+/usr/share/calf/styles/Calf_Lost_Wages/side_d_w.png
+/usr/share/calf/styles/Calf_Lost_Wages/side_e.png
+/usr/share/calf/styles/Calf_Lost_Wages/side_ne.png
+/usr/share/calf/styles/Calf_Lost_Wages/side_nw.png
+/usr/share/calf/styles/Calf_Lost_Wages/side_se.png
+/usr/share/calf/styles/Calf_Lost_Wages/side_sw.png
+/usr/share/calf/styles/Calf_Lost_Wages/side_w.png
+/usr/share/calf/styles/Calf_Lost_Wages/slider_1_horiz.png
+/usr/share/calf/styles/Calf_Lost_Wages/slider_1_vert.png
+/usr/share/calf/styles/Calf_Lost_Wages/slider_2_horiz.png
+/usr/share/calf/styles/Calf_Lost_Wages/slider_2_vert.png
+/usr/share/calf/styles/Calf_Lost_Wages/tap_active.png
+/usr/share/calf/styles/Calf_Lost_Wages/tap_inactive.png
+/usr/share/calf/styles/Calf_Lost_Wages/tap_prelight.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_0.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_1.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_block.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_bypass.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_bypass2.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_fast.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_listen.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_logarithmic.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_magnetical.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_mono.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_muffle.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_mute.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_pauseplay.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_phase.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_sc_comp.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_sc_filter.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_softclip.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_solo.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_sync.png
+/usr/share/calf/styles/Calf_Lost_Wages/toggle_2_void.png
+/usr/share/calf/styles/Calf_Lost_Wages/tubeH1.png
+/usr/share/calf/styles/Calf_Lost_Wages/tubeH2.png
+/usr/share/calf/styles/Calf_Lost_Wages/tubeV1.png
+/usr/share/calf/styles/Calf_Lost_Wages/tubeV2.png
+/usr/share/calf/styles/Calf_Midnight/background.png
+/usr/share/calf/styles/Calf_Midnight/background_menu.png
+/usr/share/calf/styles/Calf_Midnight/combo_arrow.png
+/usr/share/calf/styles/Calf_Midnight/gtk.rc
+/usr/share/calf/styles/Calf_Midnight/knob_1.png
+/usr/share/calf/styles/Calf_Midnight/knob_2.png
+/usr/share/calf/styles/Calf_Midnight/knob_3.png
+/usr/share/calf/styles/Calf_Midnight/knob_4.png
+/usr/share/calf/styles/Calf_Midnight/knob_5.png
+/usr/share/calf/styles/Calf_Midnight/light_bottom.png
+/usr/share/calf/styles/Calf_Midnight/light_top.png
+/usr/share/calf/styles/Calf_Midnight/notebook_screw.png
+/usr/share/calf/styles/Calf_Midnight/side_d_e.png
+/usr/share/calf/styles/Calf_Midnight/side_d_ne.png
+/usr/share/calf/styles/Calf_Midnight/side_d_nw.png
+/usr/share/calf/styles/Calf_Midnight/side_d_se.png
+/usr/share/calf/styles/Calf_Midnight/side_d_sw.png
+/usr/share/calf/styles/Calf_Midnight/side_d_w.png
+/usr/share/calf/styles/Calf_Midnight/side_e.png
+/usr/share/calf/styles/Calf_Midnight/side_ne.png
+/usr/share/calf/styles/Calf_Midnight/side_nw.png
+/usr/share/calf/styles/Calf_Midnight/side_se.png
+/usr/share/calf/styles/Calf_Midnight/side_sw.png
+/usr/share/calf/styles/Calf_Midnight/side_w.png
+/usr/share/calf/styles/Calf_Midnight/slider_1_horiz.png
+/usr/share/calf/styles/Calf_Midnight/slider_1_vert.png
+/usr/share/calf/styles/Calf_Midnight/slider_2_horiz.png
+/usr/share/calf/styles/Calf_Midnight/slider_2_vert.png
+/usr/share/calf/styles/Calf_Midnight/tap_active.png
+/usr/share/calf/styles/Calf_Midnight/tap_inactive.png
+/usr/share/calf/styles/Calf_Midnight/tap_prelight.png
+/usr/share/calf/styles/Calf_Midnight/toggle_0.png
+/usr/share/calf/styles/Calf_Midnight/toggle_1.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_block.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_bypass.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_bypass2.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_fast.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_listen.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_logarithmic.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_magnetical.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_mono.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_muffle.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_mute.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_pauseplay.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_phase.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_sc_comp.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_sc_filter.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_softclip.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_solo.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_sync.png
+/usr/share/calf/styles/Calf_Midnight/toggle_2_void.png
+/usr/share/calf/styles/Calf_Midnight/tubeH1.png
+/usr/share/calf/styles/Calf_Midnight/tubeH2.png
+/usr/share/calf/styles/Calf_Midnight/tubeV1.png
+/usr/share/calf/styles/Calf_Midnight/tubeV2.png
+/usr/share/calf/styles/Calf_Orange/background_menu.png
+/usr/share/calf/styles/Calf_Orange/background_plugin.png
+/usr/share/calf/styles/Calf_Orange/combo_arrow.png
+/usr/share/calf/styles/Calf_Orange/gtk.rc
+/usr/share/calf/styles/Calf_Orange/knob_1.png
+/usr/share/calf/styles/Calf_Orange/knob_2.png
+/usr/share/calf/styles/Calf_Orange/knob_3.png
+/usr/share/calf/styles/Calf_Orange/knob_4.png
+/usr/share/calf/styles/Calf_Orange/knob_5.png
+/usr/share/calf/styles/Calf_Orange/light_bottom.png
+/usr/share/calf/styles/Calf_Orange/light_top.png
+/usr/share/calf/styles/Calf_Orange/notebook_screw.png
+/usr/share/calf/styles/Calf_Orange/side_d_e.png
+/usr/share/calf/styles/Calf_Orange/side_d_ne.png
+/usr/share/calf/styles/Calf_Orange/side_d_nw.png
+/usr/share/calf/styles/Calf_Orange/side_d_se.png
+/usr/share/calf/styles/Calf_Orange/side_d_sw.png
+/usr/share/calf/styles/Calf_Orange/side_d_w.png
+/usr/share/calf/styles/Calf_Orange/side_e.png
+/usr/share/calf/styles/Calf_Orange/side_ne.png
+/usr/share/calf/styles/Calf_Orange/side_nw.png
+/usr/share/calf/styles/Calf_Orange/side_se.png
+/usr/share/calf/styles/Calf_Orange/side_sw.png
+/usr/share/calf/styles/Calf_Orange/side_w.png
+/usr/share/calf/styles/Calf_Orange/slider_1_horiz.png
+/usr/share/calf/styles/Calf_Orange/slider_1_vert.png
+/usr/share/calf/styles/Calf_Orange/slider_2_horiz.png
+/usr/share/calf/styles/Calf_Orange/slider_2_vert.png
+/usr/share/calf/styles/Calf_Orange/tap_active.png
+/usr/share/calf/styles/Calf_Orange/tap_inactive.png
+/usr/share/calf/styles/Calf_Orange/tap_prelight.png
+/usr/share/calf/styles/Calf_Orange/toggle_0.png
+/usr/share/calf/styles/Calf_Orange/toggle_1.png
+/usr/share/calf/styles/Calf_Orange/toggle_2.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_block.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_bypass.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_bypass2.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_fast.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_listen.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_logarithmic.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_magnetical.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_mono.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_muffle.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_mute.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_pauseplay.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_phase.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_sc_comp.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_sc_filter.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_softclip.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_solo.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_sync.png
+/usr/share/calf/styles/Calf_Orange/toggle_2_void.png
+/usr/share/calf/styles/Calf_Orange/tubeH1.png
+/usr/share/calf/styles/Calf_Orange/tubeH2.png
+/usr/share/calf/styles/Calf_Orange/tubeV1.png
+/usr/share/calf/styles/Calf_Orange/tubeV2.png
+/usr/share/calf/styles/Calf_Wood/background_menu.png
+/usr/share/calf/styles/Calf_Wood/background_plugin.png
+/usr/share/calf/styles/Calf_Wood/combo_arrow.png
+/usr/share/calf/styles/Calf_Wood/gtk.rc
+/usr/share/calf/styles/Calf_Wood/knob_1.png
+/usr/share/calf/styles/Calf_Wood/knob_2.png
+/usr/share/calf/styles/Calf_Wood/knob_3.png
+/usr/share/calf/styles/Calf_Wood/knob_4.png
+/usr/share/calf/styles/Calf_Wood/knob_5.png
+/usr/share/calf/styles/Calf_Wood/notebook_screw.png
+/usr/share/calf/styles/Calf_Wood/side_d_e.png
+/usr/share/calf/styles/Calf_Wood/side_d_ne.png
+/usr/share/calf/styles/Calf_Wood/side_d_nw.png
+/usr/share/calf/styles/Calf_Wood/side_d_se.png
+/usr/share/calf/styles/Calf_Wood/side_d_sw.png
+/usr/share/calf/styles/Calf_Wood/side_d_w.png
+/usr/share/calf/styles/Calf_Wood/side_e.png
+/usr/share/calf/styles/Calf_Wood/side_ne.png
+/usr/share/calf/styles/Calf_Wood/side_nw.png
+/usr/share/calf/styles/Calf_Wood/side_se.png
+/usr/share/calf/styles/Calf_Wood/side_sw.png
+/usr/share/calf/styles/Calf_Wood/side_w.png
+/usr/share/calf/styles/Calf_Wood/slider_1_horiz.png
+/usr/share/calf/styles/Calf_Wood/slider_1_vert.png
+/usr/share/calf/styles/Calf_Wood/slider_2_horiz.png
+/usr/share/calf/styles/Calf_Wood/slider_2_vert.png
+/usr/share/calf/styles/Calf_Wood/tap_active.png
+/usr/share/calf/styles/Calf_Wood/tap_inactive.png
+/usr/share/calf/styles/Calf_Wood/tap_prelight.png
+/usr/share/calf/styles/Calf_Wood/toggle_0.png
+/usr/share/calf/styles/Calf_Wood/toggle_1.png
+/usr/share/calf/styles/Calf_Wood/toggle_2.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_block.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_bypass.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_bypass2.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_fast.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_listen.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_logarithmic.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_magnetical.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_mono.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_muffle.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_mute.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_pauseplay.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_phase.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_sc_comp.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_sc_filter.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_softclip.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_solo.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_sync.png
+/usr/share/calf/styles/Calf_Wood/toggle_2_void.png
+/usr/share/calf/styles/Calf_Wood/tubeH1.png
+/usr/share/calf/styles/Calf_Wood/tubeH2.png
+/usr/share/calf/styles/Calf_Wood/tubeV1.png
+/usr/share/calf/styles/Calf_Wood/tubeV2.png
+/usr/share/icons/hicolor/128x128/apps/calf.png
+/usr/share/icons/hicolor/128x128/apps/calf_plugin.png
+/usr/share/icons/hicolor/16x16/apps/calf.png
+/usr/share/icons/hicolor/16x16/apps/calf_plugin.png
+/usr/share/icons/hicolor/22x22/apps/calf.png
+/usr/share/icons/hicolor/22x22/apps/calf_plugin.png
+/usr/share/icons/hicolor/24x24/apps/calf.png
+/usr/share/icons/hicolor/24x24/apps/calf_plugin.png
+/usr/share/icons/hicolor/256x256/apps/calf.png
+/usr/share/icons/hicolor/256x256/apps/calf_plugin.png
+/usr/share/icons/hicolor/32x32/apps/calf.png
+/usr/share/icons/hicolor/32x32/apps/calf_plugin.png
+/usr/share/icons/hicolor/48x48/apps/calf.png
+/usr/share/icons/hicolor/48x48/apps/calf_plugin.png
+/usr/share/icons/hicolor/64x64/apps/calf.png
+/usr/share/icons/hicolor/64x64/apps/calf_plugin.png
+/usr/share/icons/hicolor/scalable/apps/calf.svg
+/usr/share/icons/hicolor/scalable/apps/calf_plugin.svg
+
+%files dev
+%defattr(-,root,root,-)
+/usr/lib64/calf/libcalf.la
+/usr/lib64/calf/libcalf.so
+/usr/lib64/calf/libcalflv2gui.la
+/usr/lib64/calf/libcalflv2gui.so
+/usr/lib64/lv2/calf.lv2/Analyzer.ttl
+/usr/lib64/lv2/calf.lv2/BassEnhancer.ttl
+/usr/lib64/lv2/calf.lv2/CompensationDelay.ttl
+/usr/lib64/lv2/calf.lv2/Compressor.ttl
+/usr/lib64/lv2/calf.lv2/Crusher.ttl
+/usr/lib64/lv2/calf.lv2/Deesser.ttl
+/usr/lib64/lv2/calf.lv2/Emphasis.ttl
+/usr/lib64/lv2/calf.lv2/EnvelopeFilter.ttl
+/usr/lib64/lv2/calf.lv2/Equalizer12Band.ttl
+/usr/lib64/lv2/calf.lv2/Equalizer30Band.ttl
+/usr/lib64/lv2/calf.lv2/Equalizer5Band.ttl
+/usr/lib64/lv2/calf.lv2/Equalizer8Band.ttl
+/usr/lib64/lv2/calf.lv2/Exciter.ttl
+/usr/lib64/lv2/calf.lv2/Filter.ttl
+/usr/lib64/lv2/calf.lv2/Filterclavier.ttl
+/usr/lib64/lv2/calf.lv2/Flanger.ttl
+/usr/lib64/lv2/calf.lv2/Fluidsynth.ttl
+/usr/lib64/lv2/calf.lv2/Gate.ttl
+/usr/lib64/lv2/calf.lv2/HaasEnhancer.ttl
+/usr/lib64/lv2/calf.lv2/Limiter.ttl
+/usr/lib64/lv2/calf.lv2/MonoCompressor.ttl
+/usr/lib64/lv2/calf.lv2/MonoInput.ttl
+/usr/lib64/lv2/calf.lv2/Monosynth.ttl
+/usr/lib64/lv2/calf.lv2/MultiChorus.ttl
+/usr/lib64/lv2/calf.lv2/MultiSpread.ttl
+/usr/lib64/lv2/calf.lv2/MultibandCompressor.ttl
+/usr/lib64/lv2/calf.lv2/MultibandEnhancer.ttl
+/usr/lib64/lv2/calf.lv2/MultibandGate.ttl
+/usr/lib64/lv2/calf.lv2/MultibandLimiter.ttl
+/usr/lib64/lv2/calf.lv2/Organ.ttl
+/usr/lib64/lv2/calf.lv2/Phaser.ttl
+/usr/lib64/lv2/calf.lv2/Pitch.ttl
+/usr/lib64/lv2/calf.lv2/PsyClipper.ttl
+/usr/lib64/lv2/calf.lv2/Pulsator.ttl
+/usr/lib64/lv2/calf.lv2/Reverb.ttl
+/usr/lib64/lv2/calf.lv2/ReverseDelay.ttl
+/usr/lib64/lv2/calf.lv2/RingModulator.ttl
+/usr/lib64/lv2/calf.lv2/RotarySpeaker.ttl
+/usr/lib64/lv2/calf.lv2/Saturator.ttl
+/usr/lib64/lv2/calf.lv2/SidechainCompressor.ttl
+/usr/lib64/lv2/calf.lv2/SidechainGate.ttl
+/usr/lib64/lv2/calf.lv2/SidechainLimiter.ttl
+/usr/lib64/lv2/calf.lv2/StereoTools.ttl
+/usr/lib64/lv2/calf.lv2/TapeSimulator.ttl
+/usr/lib64/lv2/calf.lv2/TransientDesigner.ttl
+/usr/lib64/lv2/calf.lv2/VintageDelay.ttl
+/usr/lib64/lv2/calf.lv2/Vinyl.ttl
+/usr/lib64/lv2/calf.lv2/Vocoder.ttl
+/usr/lib64/lv2/calf.lv2/Wavetable.ttl
+/usr/lib64/lv2/calf.lv2/XOver2Band.ttl
+/usr/lib64/lv2/calf.lv2/XOver3Band.ttl
+/usr/lib64/lv2/calf.lv2/XOver4Band.ttl
+/usr/lib64/lv2/calf.lv2/calf.so
+/usr/lib64/lv2/calf.lv2/calflv2gui.so
+/usr/lib64/lv2/calf.lv2/manifest.ttl
+/usr/lib64/lv2/calf.lv2/presets-Filter.ttl
+/usr/lib64/lv2/calf.lv2/presets-Flanger.ttl
+/usr/lib64/lv2/calf.lv2/presets-MonoCompressor.ttl
+/usr/lib64/lv2/calf.lv2/presets-Monosynth.ttl
+/usr/lib64/lv2/calf.lv2/presets-Organ.ttl
+/usr/lib64/lv2/calf.lv2/presets-Reverb.ttl
+/usr/lib64/lv2/calf.lv2/presets-Wavetable.ttl
+
+%files doc
+%defattr(0644,root,root,0755)
+%doc /usr/share/doc/calf/*
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/calfjackhost.1
+/usr/share/man/man7/calf.7
+
+%files staticdev
+%defattr(-,root,root,-)
+/usr/lib64/calf/libcalf.a
+/usr/lib64/calf/libcalflv2gui.a

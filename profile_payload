@@ -2,4 +2,3 @@ make -j1 check V=1 VERBOSE=1 || :
 pushd src/
 ./calfbenchmark || :
 popd
-exit

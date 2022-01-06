@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : calf
 Version  : 0.90.3
-Release  : 240
+Release  : 241
 URL      : file:///aot/build/clearlinux/packages/calf/calf-v0.90.3.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/calf/calf-v0.90.3.tar.gz
 Summary  : No detailed summary available
@@ -508,7 +508,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641475494
+export SOURCE_DATE_EPOCH=1641475792
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -604,15 +604,15 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 sd -r '\s--dirty\s' ' ' .
 sd -r 'git describe' 'git describe --abbrev=0' .
 
-echo PGO Phase 1
-export CFLAGS="${CFLAGS_GENERATE}"
-export CXXFLAGS="${CXXFLAGS_GENERATE}"
-export FFLAGS="${FFLAGS_GENERATE}"
-export FCFLAGS="${FCFLAGS_GENERATE}"
-export LDFLAGS="${LDFLAGS_GENERATE}"
-export ASMFLAGS="${ASMFLAGS_GENERATE}"
-export LIBS="${LIBS_GENERATE}"
-%autogen_simple  --enable-shared=yes \
+echo PGO Phase 2
+export CFLAGS="${CFLAGS_USE}"
+export CXXFLAGS="${CXXFLAGS_USE}"
+export FFLAGS="${FFLAGS_USE}"
+export FCFLAGS="${FCFLAGS_USE}"
+export LDFLAGS="${LDFLAGS_USE}"
+export ASMFLAGS="${ASMFLAGS_USE}"
+export LIBS="${LIBS_USE}"
+ %autogen_simple --enable-shared=yes \
 --enable-static=yes \
 --enable-experimental=yes \
 --disable-debug \
@@ -621,27 +621,9 @@ export LIBS="${LIBS_GENERATE}"
 --enable-ladspa \
 --with-ladspa-dir=/usr/lib64/ladspa \
 --with-lv2-dir=/usr/lib64/lv2
-## make_prepend content
-sd "\-lfluidsynth\b" -- "-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libfluidsynth.a,/usr/lib64/libsndfile.a,/usr/lib64/libFLAC.a,/usr/lib64/libopus.a,/usr/lib64/libvorbis.a,/usr/lib64/libvorbisenc.a,/usr/lib64/libvorbisfile.a,/usr/lib64/libogg.a,-lgomp,-lasound,-lpipewire-0.3,-lgmodule-2.0,-lglib-2.0,-lpcre,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu Makefile)
-sd "\-lexpat\b" -- "-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libexpat.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu Makefile)
-sd "/usr/lib64/libexpat.so" -- "-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libexpat.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu Makefile)
-sd '/usr/lib64/libfftw3\.so' -- '-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libfftw3.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive' $(fd -uu Makefile)
-sd '\-lfftw3' -- '-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libfftw3.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive' $(fd -uu Makefile)
-## make_prepend end
-make  %{?_smp_mflags}    V=1 VERBOSE=1
-## profile_payload start
-unset LD_LIBRARY_PATH
-unset LIBRARY_PATH
-make -j1 check V=1 VERBOSE=1 || :
-pushd src/
-./calfbenchmark || :
-popd
-export LD_LIBRARY_PATH="/usr/local/nvidia/lib64:/usr/local/nvidia/lib64/gbm:/usr/local/nvidia/lib64/vdpau:/usr/local/nvidia/lib64/xorg/modules/drivers:/usr/local/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/local/nvidia/lib32:/usr/local/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
-export LIBRARY_PATH="/usr/local/nvidia/lib64:/usr/local/nvidia/lib64/gbm:/usr/local/nvidia/lib64/vdpau:/usr/local/nvidia/lib64/xorg/modules/drivers:/usr/local/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/local/nvidia/lib32:/usr/local/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
-## profile_payload end
 
 %install
-export SOURCE_DATE_EPOCH=1641475494
+export SOURCE_DATE_EPOCH=1641475792
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
@@ -735,13 +717,13 @@ export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
 export PLASMA_USE_QT_SCALING=1
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 ## altflags_pgo end
-export CFLAGS="${CFLAGS_GENERATE}"
-export CXXFLAGS="${CXXFLAGS_GENERATE}"
-export FFLAGS="${FFLAGS_GENERATE}"
-export FCFLAGS="${FCFLAGS_GENERATE}"
-export LDFLAGS="${LDFLAGS_GENERATE}"
-export ASMFLAGS="${ASMFLAGS_GENERATE}"
-export LIBS="${LIBS_GENERATE}"
+export CFLAGS="${CFLAGS_USE}"
+export CXXFLAGS="${CXXFLAGS_USE}"
+export FFLAGS="${FFLAGS_USE}"
+export FCFLAGS="${FCFLAGS_USE}"
+export LDFLAGS="${LDFLAGS_USE}"
+export ASMFLAGS="${ASMFLAGS_USE}"
+export LIBS="${LIBS_USE}"
 %make_install
 ## install_append content
 # ln -sf /usr/lib64/calf/libcalf.so %{buildroot}/usr/lib64/calf/calf.so
